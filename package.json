@@ -4,17 +4,33 @@
   "description": "A Typescript library for easily binding keyboard keys",
   "main": "index.js",
   "scripts": {
-    "build": "node ./scripts/build-core.js"
+    "build": "node ./scripts/build-core.js",
+    "lint": "eslint ./packages/*/**.ts",
+    "lint:fix": "eslint ./packages/*/** --ext .ts --fix",
+    "prepare": "simple-git-hooks"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@longo-andrea/eslint-config-typescript": "^0.2.0",
     "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
     "esbuild": "^0.15.14",
-    "esbuild-node-externals": "^1.5.0"
+    "esbuild-node-externals": "^1.5.0",
+    "eslint": "^8.28.0",
+    "simple-git-hooks": "^2.8.1"
   },
   "dependencies": {
     "typescript": "^4.9.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "pnpm lint:fix"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
   }
 }
