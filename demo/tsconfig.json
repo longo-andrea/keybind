@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"paths": {
+			"keybind": ["../packages/core/index.ts"]
+		}
+	}
+}
