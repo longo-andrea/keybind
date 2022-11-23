@@ -1,6 +1,6 @@
 {
-    "name": "core",
-    "scripts": {
-        "build": "esbuild index.ts --bundle --minify --sourcemap --target=chrome58,firefox57,safari11,edge16"
-    }
+  "name": "core",
+  "scripts": {
+    "build": "esbuild index.ts --bundle --minify --sourcemap --target=chrome58,firefox57,safari11,edge16"
+  }
 }
