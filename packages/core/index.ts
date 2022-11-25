@@ -1,21 +1,40 @@
 import { layout as base } from "./layouts/base";
 
+interface KeyBindingCallbacks {
+	keyupCallback: () => void;
+	keydownCallback?: () => void;
+}
+
 export function initKeybind(target: HTMLElement) {
-	const bindedKeys: Map<string, () => void> = new Map();
+	const bindedKeys: Map<string, KeyBindingCallbacks> = new Map();
 	let bindingEnabled = true;
 
+	// Here we are going to init keyup and keydown listeners
 	target.addEventListener("keyup", e => {
-		if (bindingEnabled && e.code === "KeyS") {
-			console.log("hello", bindedKeys);
+		if (!bindingEnabled || !bindedKeys.get(e.code)) {
+			return;
+		}
+
+		const bindedKey = bindedKeys.get(e.code);
+		bindedKey?.keyupCallback();
+	});
+	target.addEventListener("keydown", e => {
+		if (!bindingEnabled || !bindedKeys.get(e.code)) {
+			return;
+		}
+
+		const bindedKey = bindedKeys.get(e.code);
+		if (bindedKey && bindedKey.keydownCallback) {
+			bindedKey?.keydownCallback();
 		}
 	});
 
 	/**
 	 * Add a key-callback pair to the binded keys.
 	 * @param stringKey
-	 * @param callback
+	 * @param callbacks
 	 */
-	const addKey = (stringKey: string, callback: () => void) => {
+	const addKey = (stringKey: string, callbacks: KeyBindingCallbacks) => {
 		if (!stringKey || !base.has(stringKey.toUpperCase())) {
 			throw Error("Provided key is incorrect or not supported");
 		}
@@ -31,7 +50,7 @@ export function initKeybind(target: HTMLElement) {
 			);
 		}
 
-		bindedKeys.set(keyCode, callback);
+		bindedKeys.set(keyCode, callbacks);
 	};
 
 	const removeKey = (stringKey: string) => {
