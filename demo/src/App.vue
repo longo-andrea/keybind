@@ -5,7 +5,7 @@ import { initKeybind } from "keybind";
 
 onMounted(() => {
 	const { add } = initKeybind(document.body);
-	add("sns", () => {});
+	add("S", () => {});
 });
 </script>
 

@@ -1,4 +1,4 @@
-import base from "./layouts/base";
+import { layout as base } from "./layouts/base";
 
 export function initKeybind(target: HTMLElement) {
 	const bindedKeys: Map<string, () => void> = new Map();
@@ -10,12 +10,27 @@ export function initKeybind(target: HTMLElement) {
 		}
 	});
 
+	/**
+	 * Add a key-callback pair to the binded keys.
+	 * @param stringKey
+	 * @param callback
+	 */
 	const addKey = (stringKey: string, callback: () => void) => {
-		if (!stringKey || !base[stringKey.toUpperCase()]) {
-			throw Error("Provided key is incorrect or no supported");
+		if (!stringKey || !base.has(stringKey.toUpperCase())) {
+			throw Error("Provided key is incorrect or not supported");
 		}
 
-		const keyCode = base[stringKey.toUpperCase()];
+		const keyCode = base.get(stringKey.toUpperCase());
+		if (!keyCode) {
+			throw Error("Provided key is incorrect or not supported");
+		}
+
+		if (bindedKeys.has(keyCode)) {
+			throw Error(
+				"Provided key has already been initialized. Please explicitly remove it."
+			);
+		}
+
 		bindedKeys.set(keyCode, callback);
 	};
 
@@ -27,6 +42,18 @@ export function initKeybind(target: HTMLElement) {
 
 	const clearKeys = () => {
 		bindedKeys.clear();
+	};
+
+	const isKeyBinded = (stringKey: string) => {
+		if (!stringKey || !base.has(stringKey.toUpperCase())) {
+			throw Error("Provided key is incorrect or not supported");
+		}
+
+		const keyCode = base.get(stringKey.toUpperCase());
+		if (!keyCode) {
+			throw Error("Provided key is incorrect or not supported");
+		}
+		return bindedKeys.has(keyCode);
 	};
 
 	const enableBinding = () => {
@@ -41,6 +68,7 @@ export function initKeybind(target: HTMLElement) {
 		add: addKey,
 		remove: removeKey,
 		clear: clearKeys,
+		isBindend: isKeyBinded,
 		enable: enableBinding,
 		disable: disableBinding,
 	};
