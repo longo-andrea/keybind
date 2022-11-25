@@ -3,6 +3,121 @@ import { initKeybind } from "./index";
 jest.mock("./layouts/base");
 
 describe("InitKeyBind", () => {
+	beforeEach(() => {
+		jest.resetAllMocks();
+	});
+
+	describe("keyup", () => {
+		it("should trigger defined events", () => {
+			const { add } = initKeybind(window.document.body);
+			const keyBCallback = jest.fn();
+			const keyNCallback = jest.fn();
+
+			// Add some keys
+			add("B", {
+				keyupCallback: keyBCallback,
+			});
+			add("N", {
+				keyupCallback: keyNCallback,
+			});
+
+			// Trigger B keyup event
+			const event = new KeyboardEvent("keyup", { code: "KeyB" });
+			window.document.body.dispatchEvent(event);
+
+			// Expect console to have
+			expect(keyBCallback).toHaveBeenCalled();
+			expect(keyBCallback).toHaveBeenCalled();
+		});
+
+		it("should not trigger defined event if binding is disabled", () => {
+			const { add, disable } = initKeybind(window.document.body);
+			const keyCCallback = jest.fn();
+
+			// Add some keys
+			add("C", {
+				keyupCallback: keyCCallback,
+			});
+			disable();
+
+			// Trigger C keyup event
+			const event = new KeyboardEvent("keyup", { code: "KeyC" });
+			window.document.body.dispatchEvent(event);
+
+			// Expect console to have
+			expect(keyCCallback).not.toHaveBeenCalled();
+		});
+
+		it("should not trigger event if key has not been binded", () => {
+			initKeybind(window.document.body);
+			const keyDCallback = jest.fn();
+
+			// Trigger C keyup event
+			const event = new KeyboardEvent("keyup", { code: "KeyC" });
+			window.document.body.dispatchEvent(event);
+
+			// Expect console to have
+			expect(keyDCallback).not.toHaveBeenCalled();
+		});
+	});
+
+	describe("keydown", () => {
+		it("should trigger defined events", () => {
+			const { add } = initKeybind(window.document.body);
+			const keyBCallback = jest.fn();
+			const keyNCallback = jest.fn();
+
+			// Add some keys
+			add("B", {
+				keyupCallback: jest.fn(),
+				keydownCallback: keyBCallback,
+			});
+			add("N", {
+				keyupCallback: jest.fn(),
+				keydownCallback: keyNCallback,
+			});
+
+			// Trigger B keyup event
+			const event = new KeyboardEvent("keydown", { code: "KeyB" });
+			window.document.body.dispatchEvent(event);
+
+			// Expect console to have
+			expect(keyBCallback).toHaveBeenCalled();
+			expect(keyBCallback).toHaveBeenCalled();
+		});
+
+		it("should not trigger defined event if binding is disabled", () => {
+			const { add, disable } = initKeybind(window.document.body);
+			const keyCCallback = jest.fn();
+
+			// Add some keys
+			add("C", {
+				keyupCallback: jest.fn(),
+				keydownCallback: keyCCallback,
+			});
+			disable();
+
+			// Trigger C keyup event
+			const event = new KeyboardEvent("keydown", { code: "KeyC" });
+			window.document.body.dispatchEvent(event);
+
+			// Expect console to have
+			expect(keyCCallback).not.toHaveBeenCalled();
+		});
+
+		it("should not trigger event if key has not been binded", () => {
+			initKeybind(window.document.body);
+			const keyDCallback = jest.fn();
+
+			// Trigger C keyup event
+			const event = new KeyboardEvent("keydown", { code: "KeyC" });
+			window.document.body.dispatchEvent(event);
+
+			// Expect console to have
+			expect(keyDCallback).not.toHaveBeenCalled();
+		});
+	});
+
 	describe("addKey", () => {
 		it("should throw error if incorrect key is provided", () => {
 			const { add } = initKeybind(window.document.body);
