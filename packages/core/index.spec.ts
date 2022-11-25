@@ -9,8 +9,10 @@ describe("InitKeyBind", () => {
 
 			// add a fake key
 			expect(() => {
-				add("fake-key", () => {
-					console.log("Added fake key");
+				add("fake-key", {
+					keyupCallback: () => {
+						console.log("Added fake key");
+					},
 				});
 			}).toThrow("Provided key is incorrect or not supported");
 		});
@@ -20,8 +22,10 @@ describe("InitKeyBind", () => {
 
 			// add a fake key
 			expect(() => {
-				add("M", () => {
-					console.log("Added a key not supported");
+				add("M", {
+					keyupCallback: () => {
+						console.log("Added a key not supported");
+					},
 				});
 			}).toThrow("Provided key is incorrect or not supported");
 		});
@@ -30,8 +34,10 @@ describe("InitKeyBind", () => {
 			const { add, isBindend } = initKeybind(window.document.body);
 
 			// add a key
-			add("a", () => {
-				console.log("Added binding for letter A");
+			add("a", {
+				keyupCallback: () => {
+					console.log("Added binding for letter A");
+				},
 			});
 
 			// Check if the key has been added
@@ -39,20 +45,27 @@ describe("InitKeyBind", () => {
 
 			// Try the to add the same key again
 			expect(() => {
-				add("a", () => {
-					console.log("Added a key not supported");
+				add("a", {
+					keyupCallback: () => {
+						console.log("Added a key not supported");
+					},
 				});
 			}).toThrow(
 				"Provided key has already been initialized. Please explicitly remove it."
 			);
 		});
 
-		it("should add a key", () => {
+		it("should add a key with both keyup and keydown events", () => {
 			const { add, isBindend } = initKeybind(window.document.body);
 
 			// add a key
-			add("a", () => {
-				console.log("Added binding for letter A");
+			add("a", {
+				keyupCallback: () => {
+					console.log("Added binding for letter A");
+				},
+				keydownCallback: () => {
+					console.log("Added binding for keydown letter A");
+				},
 			});
 
 			// Check if the key has been added
