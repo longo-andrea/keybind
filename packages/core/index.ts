@@ -79,6 +79,10 @@ export function initKeybind(target: HTMLElement) {
 		bindedKeys.clear();
 	};
 
+	/**
+	 * Returns whether the key is binded or not.
+	 * @param stringKey
+	 */
 	const isKeyBinded = (stringKey: string) => {
 		if (!stringKey || !base.has(stringKey.toUpperCase())) {
 			throw Error("Provided key is incorrect or not supported");

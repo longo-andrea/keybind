@@ -250,4 +250,38 @@ describe("InitKeyBind", () => {
 			expect(isBindend("N")).toBeFalsy();
 		});
 	});
+
+	describe("isKeyBinded", () => {
+		it("should throw error if incorrect key is provided", () => {
+			const { isBindend } = initKeybind(window.document.body);
+
+			// add a fake key
+			expect(() => {
+				isBindend("fake-key");
+			}).toThrow("Provided key is incorrect or not supported");
+		});
+
+		it("should throw error if invalid key is provided", () => {
+			const { isBindend } = initKeybind(window.document.body);
+
+			// add a fake key
+			expect(() => {
+				isBindend("M");
+			}).toThrow("Provided key is incorrect or not supported");
+		});
+
+		it("should return if a key is present in the binded keys", () => {
+			const { add, isBindend } = initKeybind(window.document.body);
+
+			// add a key
+			add("a", {
+				keyupCallback: () => {
+					console.log("Added binding for letter A");
+				},
+			});
+
+			// Check if the key has been added
+			expect(isBindend("a")).toBeTruthy();
+		});
+	});
 });
