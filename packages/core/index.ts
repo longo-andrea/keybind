@@ -53,9 +53,22 @@ export function initKeybind(target: HTMLElement) {
 		bindedKeys.set(keyCode, callbacks);
 	};
 
+	/**
+	 * Remove the bindend key from the list.
+	 * @param stringKey
+	 */
 	const removeKey = (stringKey: string) => {
-		if (bindedKeys.has(stringKey)) {
-			bindedKeys.delete(stringKey);
+		if (!stringKey || !base.has(stringKey.toUpperCase())) {
+			throw Error("Provided key is incorrect or not supported");
+		}
+
+		const keyCode = base.get(stringKey.toUpperCase());
+		if (!keyCode) {
+			throw Error("Provided key is incorrect or not supported");
+		}
+
+		if (bindedKeys.has(keyCode)) {
+			bindedKeys.delete(keyCode);
 		}
 	};
 

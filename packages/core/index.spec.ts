@@ -187,4 +187,42 @@ describe("InitKeyBind", () => {
 			expect(isBindend("a")).toBeTruthy();
 		});
 	});
+
+	describe("removeKey", () => {
+		it("should throw error if incorrect key is provided", () => {
+			const { remove } = initKeybind(window.document.body);
+
+			// add a fake key
+			expect(() => {
+				remove("fake-key");
+			}).toThrow("Provided key is incorrect or not supported");
+		});
+
+		it("should throw error if invalid key is provided", () => {
+			const { remove } = initKeybind(window.document.body);
+
+			// add a fake key
+			expect(() => {
+				remove("M");
+			}).toThrow("Provided key is incorrect or not supported");
+		});
+
+		it("should remove a key if exists", () => {
+			const { add, remove, isBindend } = initKeybind(window.document.body);
+
+			// Add a key
+			add("a", {
+				keyupCallback: () => {
+					console.log("Added binding for letter A");
+				},
+			});
+			expect(isBindend("a")).toBeTruthy();
+
+			// Remove the key
+			remove("a");
+
+			// Check if the key has been removed
+			expect(isBindend("a")).toBeFalsy();
+		});
+	});
 });
