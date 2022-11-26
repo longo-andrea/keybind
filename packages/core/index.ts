@@ -95,12 +95,25 @@ export function initKeybind(target: HTMLElement) {
 		return bindedKeys.has(keyCode);
 	};
 
+	/**
+	 * Enables bindings.
+	 */
 	const enableBinding = () => {
 		bindingEnabled = true;
 	};
 
+	/**
+	 * Disables bindings.
+	 */
 	const disableBinding = () => {
 		bindingEnabled = false;
+	};
+
+	/**
+	 * Returns whether the binding is enabled or not.
+	 */
+	const isBindingEnabled = () => {
+		return bindingEnabled;
 	};
 
 	return {
@@ -110,5 +123,6 @@ export function initKeybind(target: HTMLElement) {
 		isBindend: isKeyBinded,
 		enable: enableBinding,
 		disable: disableBinding,
+		isEnabled: isBindingEnabled,
 	};
 }

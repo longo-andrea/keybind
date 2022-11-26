@@ -284,4 +284,28 @@ describe("InitKeyBind", () => {
 			expect(isBindend("a")).toBeTruthy();
 		});
 	});
+
+	describe("enable & isEnabled", () => {
+		it("should enable bindings", () => {
+			const { enable, isEnabled } = initKeybind(window.document.body);
+
+			// Enable bindings
+			enable();
+
+			// Check if binding is enabled
+			expect(isEnabled()).toBeTruthy();
+		});
+	});
+
+	describe("disable & isEnabled", () => {
+		it("should disable bindings", () => {
+			const { disable, isEnabled } = initKeybind(window.document.body);
+
+			// Enable bindings
+			disable();
+
+			// Check if binding is enabled
+			expect(isEnabled()).toBeFalsy();
+		});
+	});
 });
