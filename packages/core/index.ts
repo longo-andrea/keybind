@@ -72,6 +72,9 @@ export function initKeybind(target: HTMLElement) {
 		}
 	};
 
+	/**
+	 * Remove all the bindend keys from the list.
+	 */
 	const clearKeys = () => {
 		bindedKeys.clear();
 	};

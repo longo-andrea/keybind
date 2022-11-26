@@ -225,4 +225,29 @@ describe("InitKeyBind", () => {
 			expect(isBindend("a")).toBeFalsy();
 		});
 	});
+
+	describe("clearKeys", () => {
+		it("should clear all keys", () => {
+			const { add, clear, isBindend } = initKeybind(window.document.body);
+			const keyBCallback = jest.fn();
+			const keyNCallback = jest.fn();
+
+			// Add some keys
+			add("B", {
+				keyupCallback: keyBCallback,
+			});
+			add("N", {
+				keyupCallback: keyNCallback,
+			});
+			expect(isBindend("B")).toBeTruthy();
+			expect(isBindend("N")).toBeTruthy();
+
+			// Clear all binded keys
+			clear();
+
+			// Check if the keys have been cleared
+			expect(isBindend("B")).toBeFalsy();
+			expect(isBindend("N")).toBeFalsy();
+		});
+	});
 });
