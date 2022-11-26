@@ -301,11 +301,38 @@ describe("InitKeyBind", () => {
 		it("should disable bindings", () => {
 			const { disable, isEnabled } = initKeybind(window.document.body);
 
-			// Enable bindings
+			// Disable bindings
 			disable();
 
 			// Check if binding is enabled
 			expect(isEnabled()).toBeFalsy();
+		});
+	});
+
+	describe("unbindListeners", () => {
+		it("should unbind listeners", () => {
+			const { add, unbind } = initKeybind(window.document.body);
+			const keyupNCallback = jest.fn();
+			const keydownNCallback = jest.fn();
+
+			// Add a key binding
+			add("N", {
+				keyupCallback: keyupNCallback,
+				keydownCallback: keydownNCallback,
+			});
+
+			// Unbind listeners
+			unbind();
+
+			// Trigger B keyup and keydown events
+			const eventKeyup = new KeyboardEvent("keyup", { code: "KeyB" });
+			const eventKeydown = new KeyboardEvent("keydown", { code: "KeyB" });
+			window.document.body.dispatchEvent(eventKeyup);
+			window.document.body.dispatchEvent(eventKeydown);
+
+			// Check if binding is enabled
+			expect(keyupNCallback).not.toHaveBeenCalled();
+			expect(keydownNCallback).not.toHaveBeenCalled();
 		});
 	});
 });

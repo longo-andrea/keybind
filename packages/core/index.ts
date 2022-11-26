@@ -10,15 +10,16 @@ export function initKeybind(target: HTMLElement) {
 	let bindingEnabled = true;
 
 	// Here we are going to init keyup and keydown listeners
-	target.addEventListener("keyup", e => {
+	const _keyupHandler = (e: KeyboardEvent) => {
 		if (!bindingEnabled || !bindedKeys.has(e.code)) {
 			return;
 		}
 
 		const bindedKey = bindedKeys.get(e.code);
 		bindedKey?.keyupCallback();
-	});
-	target.addEventListener("keydown", e => {
+	};
+
+	const _keydownHandler = (e: KeyboardEvent) => {
 		if (!bindingEnabled || !bindedKeys.has(e.code)) {
 			return;
 		}
@@ -27,7 +28,9 @@ export function initKeybind(target: HTMLElement) {
 		if (bindedKey && bindedKey.keydownCallback) {
 			bindedKey?.keydownCallback();
 		}
-	});
+	};
+	target.addEventListener("keyup", _keyupHandler);
+	target.addEventListener("keydown", _keydownHandler);
 
 	/**
 	 * Add a key-callback pair to the binded keys.
@@ -116,6 +119,14 @@ export function initKeybind(target: HTMLElement) {
 		return bindingEnabled;
 	};
 
+	/**
+	 * Unbinds listeners.
+	 */
+	const unbindListeners = () => {
+		target.removeEventListener("keyup", _keyupHandler);
+		target.addEventListener("keydown", _keydownHandler);
+	};
+
 	return {
 		add: addKey,
 		remove: removeKey,
@@ -124,5 +135,6 @@ export function initKeybind(target: HTMLElement) {
 		enable: enableBinding,
 		disable: disableBinding,
 		isEnabled: isBindingEnabled,
+		unbind: unbindListeners,
 	};
 }
