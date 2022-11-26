@@ -1,8 +1,8 @@
 import { layout as base } from "./layouts/base";
 
 interface KeyBindingCallbacks {
-	keyupCallback: () => void;
-	keydownCallback?: () => void;
+	keyupCallback?: () => void;
+	keydownCallback: () => void;
 }
 
 export function initKeybind(target: HTMLElement) {
@@ -16,7 +16,9 @@ export function initKeybind(target: HTMLElement) {
 		}
 
 		const bindedKey = bindedKeys.get(e.code);
-		bindedKey?.keyupCallback();
+		if (bindedKey && bindedKey.keyupCallback) {
+			bindedKey?.keyupCallback();
+		}
 	};
 
 	const _keydownHandler = (e: KeyboardEvent) => {

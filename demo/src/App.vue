@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 
-import { initKeybind } from "keybind";
+import keyboardJS from "keyboardjs";
 
 onMounted(() => {
-	const { add } = initKeybind(document.body);
-	add("S", () => {});
+	keyboardJS.bind(
+		"a",
+		e => {
+			console.log("a is pressed");
+		},
+		e => {
+			console.log("a is released");
+		},
+		true
+	);
 });
 </script>
 
