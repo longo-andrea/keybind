@@ -1,12 +1,21 @@
 import { layout as base } from "./layouts/base";
 
+interface KeyBindingCallbackMap {
+	callbacks: KeyBindingCallbacks;
+	options?: KeyBindingOptions;
+}
+
 interface KeyBindingCallbacks {
 	keyupCallback?: () => void;
 	keydownCallback: () => void;
 }
 
+interface KeyBindingOptions {
+	preventRepeatOnKeyDown?: boolean;
+}
+
 export function initKeybind(target: HTMLElement) {
-	const bindedKeys: Map<string, KeyBindingCallbacks> = new Map();
+	const bindedKeys: Map<string, KeyBindingCallbackMap> = new Map();
 	let bindingEnabled = true;
 
 	// Here we are going to init keyup and keydown listeners
@@ -16,8 +25,8 @@ export function initKeybind(target: HTMLElement) {
 		}
 
 		const bindedKey = bindedKeys.get(e.code);
-		if (bindedKey && bindedKey.keyupCallback) {
-			bindedKey?.keyupCallback();
+		if (bindedKey && bindedKey.callbacks.keyupCallback) {
+			bindedKey.callbacks?.keyupCallback();
 		}
 	};
 
@@ -27,8 +36,21 @@ export function initKeybind(target: HTMLElement) {
 		}
 
 		const bindedKey = bindedKeys.get(e.code);
-		if (bindedKey && bindedKey.keydownCallback) {
-			bindedKey?.keydownCallback();
+
+		// If the user request to prevent repeat, and we are in a repeat event
+		// then, we prevent to invoke the callback
+		if (
+			bindedKey &&
+			bindedKey.options &&
+			bindedKey.options.preventRepeatOnKeyDown &&
+			e.repeat
+		) {
+			return;
+		}
+
+		// Otherwise invoke the callback
+		if (bindedKey && bindedKey.callbacks.keydownCallback) {
+			bindedKey.callbacks.keydownCallback();
 		}
 	};
 	target.addEventListener("keyup", _keyupHandler);
@@ -39,7 +61,11 @@ export function initKeybind(target: HTMLElement) {
 	 * @param stringKey
 	 * @param callbacks
 	 */
-	const addKey = (stringKey: string, callbacks: KeyBindingCallbacks) => {
+	const addKey = (
+		stringKey: string,
+		callbacks: KeyBindingCallbacks,
+		options: KeyBindingOptions = { preventRepeatOnKeyDown: false }
+	) => {
 		if (!stringKey || !base.has(stringKey.toUpperCase())) {
 			throw Error("Provided key is incorrect or not supported");
 		}
@@ -55,7 +81,7 @@ export function initKeybind(target: HTMLElement) {
 			);
 		}
 
-		bindedKeys.set(keyCode, callbacks);
+		bindedKeys.set(keyCode, { callbacks, options });
 	};
 
 	/**
@@ -126,7 +152,7 @@ export function initKeybind(target: HTMLElement) {
 	 */
 	const unbindListeners = () => {
 		target.removeEventListener("keyup", _keyupHandler);
-		target.addEventListener("keydown", _keydownHandler);
+		target.removeEventListener("keydown", _keydownHandler);
 	};
 
 	return {

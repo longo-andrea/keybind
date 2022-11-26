@@ -15,9 +15,11 @@ describe("InitKeyBind", () => {
 
 			// Add some keys
 			add("B", {
+				keydownCallback: jest.fn(),
 				keyupCallback: keyBCallback,
 			});
 			add("N", {
+				keydownCallback: jest.fn(),
 				keyupCallback: keyNCallback,
 			});
 
@@ -36,12 +38,12 @@ describe("InitKeyBind", () => {
 
 			// Add some keys
 			add("C", {
-				keyupCallback: keyCCallback,
+				keydownCallback: keyCCallback,
 			});
 			disable();
 
 			// Trigger C keyup event
-			const event = new KeyboardEvent("keyup", { code: "KeyC" });
+			const event = new KeyboardEvent("keydown", { code: "KeyC" });
 			window.document.body.dispatchEvent(event);
 
 			// Expect console to have
@@ -69,21 +71,21 @@ describe("InitKeyBind", () => {
 
 			// Add some keys
 			add("B", {
-				keyupCallback: jest.fn(),
 				keydownCallback: keyBCallback,
 			});
 			add("N", {
-				keyupCallback: jest.fn(),
 				keydownCallback: keyNCallback,
 			});
 
 			// Trigger B keyup event
 			const event = new KeyboardEvent("keydown", { code: "KeyB" });
+			const anotherEvent = new KeyboardEvent("keydown", { code: "KeyN" });
 			window.document.body.dispatchEvent(event);
+			window.document.body.dispatchEvent(anotherEvent);
 
-			// Expect console to have
+			// Expect callback to have been called
 			expect(keyBCallback).toHaveBeenCalled();
-			expect(keyBCallback).toHaveBeenCalled();
+			expect(keyNCallback).toHaveBeenCalled();
 		});
 
 		it("should not trigger defined event if binding is disabled", () => {
@@ -116,6 +118,29 @@ describe("InitKeyBind", () => {
 			// Expect console to have
 			expect(keyDCallback).not.toHaveBeenCalled();
 		});
+
+		it("should not trigger multiple events if user request to preventRepeat", () => {
+			const { add } = initKeybind(window.document.body);
+			const keyBCallback = jest.fn();
+			// Add some keys
+			add(
+				"B",
+				{
+					keyupCallback: jest.fn(),
+					keydownCallback: keyBCallback,
+				},
+				{ preventRepeatOnKeyDown: true }
+			);
+			// Trigger B keyup event
+			const event = new KeyboardEvent("keydown", { code: "KeyB" });
+			window.document.body.dispatchEvent(event);
+			expect(keyBCallback).toHaveBeenCalled();
+
+			// Trigger a keydown event repeat
+			Object.defineProperty(event, "repeat", { get: () => true });
+			window.document.body.dispatchEvent(event);
+			expect(keyBCallback).toHaveBeenCalledTimes(1);
+		});
 	});
 
 	describe("addKey", () => {
@@ -125,7 +150,7 @@ describe("InitKeyBind", () => {
 			// add a fake key
 			expect(() => {
 				add("fake-key", {
-					keyupCallback: () => {
+					keydownCallback: () => {
 						console.log("Added fake key");
 					},
 				});
@@ -138,7 +163,7 @@ describe("InitKeyBind", () => {
 			// add a fake key
 			expect(() => {
 				add("M", {
-					keyupCallback: () => {
+					keydownCallback: () => {
 						console.log("Added a key not supported");
 					},
 				});
@@ -150,7 +175,7 @@ describe("InitKeyBind", () => {
 
 			// add a key
 			add("a", {
-				keyupCallback: () => {
+				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
@@ -161,7 +186,7 @@ describe("InitKeyBind", () => {
 			// Try the to add the same key again
 			expect(() => {
 				add("a", {
-					keyupCallback: () => {
+					keydownCallback: () => {
 						console.log("Added a key not supported");
 					},
 				});
@@ -212,7 +237,7 @@ describe("InitKeyBind", () => {
 
 			// Add a key
 			add("a", {
-				keyupCallback: () => {
+				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
@@ -234,10 +259,10 @@ describe("InitKeyBind", () => {
 
 			// Add some keys
 			add("B", {
-				keyupCallback: keyBCallback,
+				keydownCallback: keyBCallback,
 			});
 			add("N", {
-				keyupCallback: keyNCallback,
+				keydownCallback: keyNCallback,
 			});
 			expect(isBindend("B")).toBeTruthy();
 			expect(isBindend("N")).toBeTruthy();
@@ -275,7 +300,7 @@ describe("InitKeyBind", () => {
 
 			// add a key
 			add("a", {
-				keyupCallback: () => {
+				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
