@@ -2,6 +2,7 @@
 	"name": "keybind",
 	"version": "0.1.0",
 	"description": "A Typescript library for easily binding keyboard keys",
+	"author": "Andrea Longo<https://github.com/longo-andrea>",
 	"main": "index.js",
 	"scripts": {
 		"build": "node ./scripts/build-core.js",
@@ -11,8 +12,13 @@
 		"dev:demo": "cd ./demo; pnpm dev",
 		"prepare": "simple-git-hooks"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"keyboard",
+		"javascript",
+		"typescript",
+		"keyboard-events",
+		"keybinding"
+	],
 	"license": "MIT",
 	"devDependencies": {
 		"@longo-andrea/eslint-config-typescript": "^0.2.0",
