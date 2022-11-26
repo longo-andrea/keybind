@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 
-import keyboardJS from "keyboardjs";
+import { initKeybind } from "keybind";
 
 onMounted(() => {
-	keyboardJS.bind(
-		"a",
-		e => {
-			console.log("a is pressed");
+	const { add } = initKeybind(document.body);
+	add(
+		"S",
+		{
+			keyupCallback: () => {
+				console.log("Hello from S");
+			},
+			keydownCallback: () => {
+				console.log("Hello from keydown S");
+			},
 		},
-		e => {
-			console.log("a is released");
-		},
-		true
+		{ preventRepeatOnKeyDown: true }
 	);
 });
 </script>
