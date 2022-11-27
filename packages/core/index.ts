@@ -68,11 +68,11 @@ export const addKey = (
 	callbacks: KeyBindingCallbacks,
 	options: KeyBindingOptions = { preventRepeatOnKeyDown: false }
 ) => {
-	if (!stringKey || !base.has(stringKey.toUpperCase())) {
+	if (!stringKey || !base.has(stringKey)) {
 		throw Error("Provided key is incorrect or not supported");
 	}
 
-	const keyCode = base.get(stringKey.toUpperCase());
+	const keyCode = base.get(stringKey);
 	if (!keyCode) {
 		throw Error("Provided key is incorrect or not supported");
 	}
@@ -93,11 +93,11 @@ export const addKey = (
  *
  */
 export const removeKey = (stringKey: string) => {
-	if (!stringKey || !base.has(stringKey.toUpperCase())) {
+	if (!stringKey || !base.has(stringKey)) {
 		throw Error("Provided key is incorrect or not supported");
 	}
 
-	const keyCode = base.get(stringKey.toUpperCase());
+	const keyCode = base.get(stringKey);
 	if (!keyCode) {
 		throw Error("Provided key is incorrect or not supported");
 	}
@@ -123,11 +123,11 @@ export const clearKeys = () => {
  *
  */
 export const isKeyBinded = (stringKey: string) => {
-	if (!stringKey || !base.has(stringKey.toUpperCase())) {
+	if (!stringKey || !base.has(stringKey)) {
 		throw Error("Provided key is incorrect or not supported");
 	}
 
-	const keyCode = base.get(stringKey.toUpperCase());
+	const keyCode = base.get(stringKey);
 	if (!keyCode) {
 		throw Error("Provided key is incorrect or not supported");
 	}

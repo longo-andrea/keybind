@@ -188,18 +188,18 @@ describe("InitKeyBind", () => {
 			initKeybind(window.document.body);
 
 			// add a key
-			addKey("a", {
+			addKey("A", {
 				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
 
 			// Check if the key has been added
-			expect(isKeyBinded("a")).toBeTruthy();
+			expect(isKeyBinded("A")).toBeTruthy();
 
 			// Try the to add the same key again
 			expect(() => {
-				addKey("a", {
+				addKey("A", {
 					keydownCallback: () => {
 						console.log("Added a key not supported");
 					},
@@ -213,7 +213,7 @@ describe("InitKeyBind", () => {
 			initKeybind(window.document.body);
 
 			// add a key
-			addKey("a", {
+			addKey("A", {
 				keyupCallback: () => {
 					console.log("Added binding for letter A");
 				},
@@ -223,7 +223,7 @@ describe("InitKeyBind", () => {
 			});
 
 			// Check if the key has been added
-			expect(isKeyBinded("a")).toBeTruthy();
+			expect(isKeyBinded("A")).toBeTruthy();
 		});
 	});
 
@@ -250,18 +250,18 @@ describe("InitKeyBind", () => {
 			initKeybind(window.document.body);
 
 			// Add a key
-			addKey("a", {
+			addKey("A", {
 				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
-			expect(isKeyBinded("a")).toBeTruthy();
+			expect(isKeyBinded("A")).toBeTruthy();
 
 			// Remove the key
-			removeKey("a");
+			removeKey("A");
 
 			// Check if the key has been removed
-			expect(isKeyBinded("a")).toBeFalsy();
+			expect(isKeyBinded("A")).toBeFalsy();
 		});
 	});
 
@@ -313,14 +313,14 @@ describe("InitKeyBind", () => {
 			initKeybind(window.document.body);
 
 			// add a key
-			addKey("a", {
+			addKey("A", {
 				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
 
 			// Check if the key has been added
-			expect(isKeyBinded("a")).toBeTruthy();
+			expect(isKeyBinded("A")).toBeTruthy();
 		});
 	});
 
