@@ -7,6 +7,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			keybind: resolve(__dirname, "../packages/core/index.ts"),
+			"keybind-layout": resolve(__dirname, "../packages/core/layouts/base.ts"),
 		},
 	},
 });
