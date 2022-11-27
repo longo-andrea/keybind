@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 
-import { initKeybind } from "keybind";
+import { initKeybind, addKey } from "keybind";
 
 onMounted(() => {
-	const { add } = initKeybind(document.body);
-	add(
+	initKeybind(document.body);
+	addKey(
 		"S",
 		{
 			keyupCallback: () => {
