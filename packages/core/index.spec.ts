@@ -1,24 +1,38 @@
-import { initKeybind } from "./index";
+import {
+	initKeybind,
+	addKey,
+	removeKey,
+	clearKeys,
+	toggleBinding,
+	isBindingEnabled,
+	unbindListeners,
+	isKeyBinded,
+} from "./index";
 
 jest.mock("./layouts/base");
 
 describe("InitKeyBind", () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
+
+		// Reset the module state
+		clearKeys();
+		unbindListeners(window.document.body);
+		toggleBinding(true);
 	});
 
 	describe("keyup", () => {
 		it("should trigger defined events", () => {
-			const { add } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			const keyNCallback = jest.fn();
 
 			// Add some keys
-			add("B", {
+			addKey("B", {
 				keydownCallback: jest.fn(),
 				keyupCallback: keyBCallback,
 			});
-			add("N", {
+			addKey("N", {
 				keydownCallback: jest.fn(),
 				keyupCallback: keyNCallback,
 			});
@@ -33,14 +47,14 @@ describe("InitKeyBind", () => {
 		});
 
 		it("should not trigger defined event if binding is disabled", () => {
-			const { add, disable } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyCCallback = jest.fn();
 
 			// Add some keys
-			add("C", {
+			addKey("C", {
 				keydownCallback: keyCCallback,
 			});
-			disable();
+			toggleBinding(false);
 
 			// Trigger C keyup event
 			const event = new KeyboardEvent("keydown", { code: "KeyC" });
@@ -65,15 +79,15 @@ describe("InitKeyBind", () => {
 
 	describe("keydown", () => {
 		it("should trigger defined events", () => {
-			const { add } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			const keyNCallback = jest.fn();
 
 			// Add some keys
-			add("B", {
+			addKey("B", {
 				keydownCallback: keyBCallback,
 			});
-			add("N", {
+			addKey("N", {
 				keydownCallback: keyNCallback,
 			});
 
@@ -89,15 +103,15 @@ describe("InitKeyBind", () => {
 		});
 
 		it("should not trigger defined event if binding is disabled", () => {
-			const { add, disable } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyCCallback = jest.fn();
 
 			// Add some keys
-			add("C", {
+			addKey("C", {
 				keyupCallback: jest.fn(),
 				keydownCallback: keyCCallback,
 			});
-			disable();
+			toggleBinding(false);
 
 			// Trigger C keyup event
 			const event = new KeyboardEvent("keydown", { code: "KeyC" });
@@ -120,10 +134,10 @@ describe("InitKeyBind", () => {
 		});
 
 		it("should not trigger multiple events if user request to preventRepeat", () => {
-			const { add } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			// Add some keys
-			add(
+			addKey(
 				"B",
 				{
 					keyupCallback: jest.fn(),
@@ -145,11 +159,11 @@ describe("InitKeyBind", () => {
 
 	describe("addKey", () => {
 		it("should throw error if incorrect key is provided", () => {
-			const { add } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a fake key
 			expect(() => {
-				add("fake-key", {
+				addKey("fake-key", {
 					keydownCallback: () => {
 						console.log("Added fake key");
 					},
@@ -158,11 +172,11 @@ describe("InitKeyBind", () => {
 		});
 
 		it("should throw error if invalid key is provided", () => {
-			const { add } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a fake key
 			expect(() => {
-				add("M", {
+				addKey("M", {
 					keydownCallback: () => {
 						console.log("Added a key not supported");
 					},
@@ -171,21 +185,21 @@ describe("InitKeyBind", () => {
 		});
 
 		it("should throw error if a key has already been added", () => {
-			const { add, isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a key
-			add("a", {
+			addKey("a", {
 				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
 
 			// Check if the key has been added
-			expect(isBindend("a")).toBeTruthy();
+			expect(isKeyBinded("a")).toBeTruthy();
 
 			// Try the to add the same key again
 			expect(() => {
-				add("a", {
+				addKey("a", {
 					keydownCallback: () => {
 						console.log("Added a key not supported");
 					},
@@ -196,10 +210,10 @@ describe("InitKeyBind", () => {
 		});
 
 		it("should add a key with both keyup and keydown events", () => {
-			const { add, isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a key
-			add("a", {
+			addKey("a", {
 				keyupCallback: () => {
 					console.log("Added binding for letter A");
 				},
@@ -209,145 +223,145 @@ describe("InitKeyBind", () => {
 			});
 
 			// Check if the key has been added
-			expect(isBindend("a")).toBeTruthy();
+			expect(isKeyBinded("a")).toBeTruthy();
 		});
 	});
 
 	describe("removeKey", () => {
 		it("should throw error if incorrect key is provided", () => {
-			const { remove } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a fake key
 			expect(() => {
-				remove("fake-key");
+				removeKey("fake-key");
 			}).toThrow("Provided key is incorrect or not supported");
 		});
 
 		it("should throw error if invalid key is provided", () => {
-			const { remove } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a fake key
 			expect(() => {
-				remove("M");
+				removeKey("M");
 			}).toThrow("Provided key is incorrect or not supported");
 		});
 
 		it("should remove a key if exists", () => {
-			const { add, remove, isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// Add a key
-			add("a", {
+			addKey("a", {
 				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
-			expect(isBindend("a")).toBeTruthy();
+			expect(isKeyBinded("a")).toBeTruthy();
 
 			// Remove the key
-			remove("a");
+			removeKey("a");
 
 			// Check if the key has been removed
-			expect(isBindend("a")).toBeFalsy();
+			expect(isKeyBinded("a")).toBeFalsy();
 		});
 	});
 
 	describe("clearKeys", () => {
 		it("should clear all keys", () => {
-			const { add, clear, isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			const keyNCallback = jest.fn();
 
 			// Add some keys
-			add("B", {
+			addKey("B", {
 				keydownCallback: keyBCallback,
 			});
-			add("N", {
+			addKey("N", {
 				keydownCallback: keyNCallback,
 			});
-			expect(isBindend("B")).toBeTruthy();
-			expect(isBindend("N")).toBeTruthy();
+			expect(isKeyBinded("B")).toBeTruthy();
+			expect(isKeyBinded("N")).toBeTruthy();
 
 			// Clear all binded keys
-			clear();
+			clearKeys();
 
 			// Check if the keys have been cleared
-			expect(isBindend("B")).toBeFalsy();
-			expect(isBindend("N")).toBeFalsy();
+			expect(isKeyBinded("B")).toBeFalsy();
+			expect(isKeyBinded("N")).toBeFalsy();
 		});
 	});
 
 	describe("isKeyBinded", () => {
 		it("should throw error if incorrect key is provided", () => {
-			const { isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a fake key
 			expect(() => {
-				isBindend("fake-key");
+				isKeyBinded("fake-key");
 			}).toThrow("Provided key is incorrect or not supported");
 		});
 
 		it("should throw error if invalid key is provided", () => {
-			const { isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a fake key
 			expect(() => {
-				isBindend("M");
+				isKeyBinded("M");
 			}).toThrow("Provided key is incorrect or not supported");
 		});
 
 		it("should return if a key is present in the binded keys", () => {
-			const { add, isBindend } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// add a key
-			add("a", {
+			addKey("a", {
 				keydownCallback: () => {
 					console.log("Added binding for letter A");
 				},
 			});
 
 			// Check if the key has been added
-			expect(isBindend("a")).toBeTruthy();
+			expect(isKeyBinded("a")).toBeTruthy();
 		});
 	});
 
 	describe("enable & isEnabled", () => {
 		it("should enable bindings", () => {
-			const { enable, isEnabled } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// Enable bindings
-			enable();
+			toggleBinding(true);
 
 			// Check if binding is enabled
-			expect(isEnabled()).toBeTruthy();
+			expect(isBindingEnabled()).toBeTruthy();
 		});
 	});
 
 	describe("disable & isEnabled", () => {
 		it("should disable bindings", () => {
-			const { disable, isEnabled } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 
 			// Disable bindings
-			disable();
+			toggleBinding(false);
 
 			// Check if binding is enabled
-			expect(isEnabled()).toBeFalsy();
+			expect(isBindingEnabled()).toBeFalsy();
 		});
 	});
 
 	describe("unbindListeners", () => {
 		it("should unbind listeners", () => {
-			const { add, unbind } = initKeybind(window.document.body);
+			initKeybind(window.document.body);
 			const keyupNCallback = jest.fn();
 			const keydownNCallback = jest.fn();
 
 			// Add a key binding
-			add("N", {
+			addKey("N", {
 				keyupCallback: keyupNCallback,
 				keydownCallback: keydownNCallback,
 			});
 
 			// Unbind listeners
-			unbind();
+			unbindListeners(window.document.body);
 
 			// Trigger B keyup and keydown events
 			const eventKeyup = new KeyboardEvent("keyup", { code: "KeyB" });
