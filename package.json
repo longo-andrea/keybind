@@ -10,7 +10,7 @@
 		"lint:fix": "eslint --ignore-path .eslintignore ./packages/*/**.ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
 		"dev:demo": "cd ./demo; pnpm dev",
-		"docs:readme": "typedoc --tsconfig ./packages/core/tsconfig.json --plugin typedoc-plugin-markdown --out ./api --basePath ./packages/core --entryPoints ./packages/core/index.ts",
+		"docs:readme": "typedoc; node ./scripts/generate-readme.mjs",
 		"prepare": "simple-git-hooks"
 	},
 	"keywords": [
@@ -36,6 +36,7 @@
 		"@commitlint/config-conventional": "^17.3.0",
 		"eslint-config-prettier": "^8.5.0",
 		"prettier": "^2.8.0",
+		"turbodepot-node": "^7.0.3",
 		"typedoc": "^0.23.21",
 		"typedoc-plugin-markdown": "^3.13.6",
 		"typescript": "^4.9.3"
