@@ -16,7 +16,7 @@ const _keyupHandler = (e: KeyboardEvent) => {
 
 	const bindedKey = bindedKeys.get(e.code);
 	if (bindedKey && bindedKey.callbacks.keyupCallback) {
-		bindedKey.callbacks?.keyupCallback();
+		bindedKey.callbacks?.keyupCallback(e);
 	}
 };
 
@@ -40,7 +40,7 @@ const _keydownHandler = (e: KeyboardEvent) => {
 
 	// Otherwise invoke the callback
 	if (bindedKey && bindedKey.callbacks.keydownCallback) {
-		bindedKey.callbacks.keydownCallback();
+		bindedKey.callbacks.keydownCallback(e);
 	}
 };
 

@@ -4,8 +4,8 @@ export interface KeyBindingCallbackMap {
 }
 
 export interface KeyBindingCallbacks {
-	keyupCallback?: () => void;
-	keydownCallback: () => void;
+	keyupCallback?: (e?: KeyboardEvent) => void;
+	keydownCallback: (e?: KeyboardEvent) => void;
 }
 
 export interface KeyBindingOptions {
