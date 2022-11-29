@@ -1,5 +1,8 @@
 {
 	"name": "core",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"typings": "dist/index.d.ts",
 	"scripts": {
 		"build": "esbuild index.ts --bundle --minify --sourcemap --target=chrome58,firefox57,safari11,edge16",
 		"test": "jest"

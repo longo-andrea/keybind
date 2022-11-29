@@ -5,7 +5,7 @@
 	"author": "Andrea Longo<https://github.com/longo-andrea>",
 	"main": "index.js",
 	"scripts": {
-		"build": "node ./scripts/build-core.js",
+		"build": "rollup -c ./scripts/rollup.config.mjs",
 		"lint": "eslint --ignore-path .eslintignore ./packages/*/**.ts",
 		"lint:fix": "eslint --ignore-path .eslintignore ./packages/*/**.ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
@@ -36,6 +36,9 @@
 		"@commitlint/config-conventional": "^17.3.0",
 		"eslint-config-prettier": "^8.5.0",
 		"prettier": "^2.8.0",
+		"rollup": "^3.5.0",
+		"rollup-plugin-dts": "^5.0.0",
+		"rollup-plugin-esbuild": "^5.0.0",
 		"turbodepot-node": "^7.0.3",
 		"typedoc": "^0.23.21",
 		"typedoc-plugin-markdown": "^3.13.6",
