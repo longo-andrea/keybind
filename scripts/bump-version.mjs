@@ -60,7 +60,7 @@ if (!version) {
 bumpAllPackages(version);
 
 // Stage and commit
-execSync("git add *", { stdio: "inherit" });
+execSync("git add .", { stdio: "inherit" });
 execSync(`git commit -m "chore: release version: ${version}"`, {
 	stdio: "inherit",
 });
