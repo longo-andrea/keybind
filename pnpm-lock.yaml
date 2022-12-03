@@ -10,6 +10,7 @@ importers:
       '@types/node': ^18.11.9
       '@typescript-eslint/eslint-plugin': ^5.44.0
       '@typescript-eslint/parser': ^5.44.0
+      child_process: ^1.0.2
       esbuild: ^0.15.14
       esbuild-node-externals: ^1.5.0
       eslint: ^8.28.0
@@ -27,6 +28,7 @@ importers:
     dependencies:
       '@commitlint/cli': 17.3.0
       '@commitlint/config-conventional': 17.3.0
+      child_process: 1.0.2
       eslint-config-prettier: 8.5.0_eslint@8.28.0
       glob: 8.0.3
       prettier: 2.8.0
@@ -1786,6 +1788,10 @@ packages:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
     engines: {node: '>=10'}
     dev: true
+
+  /child_process/1.0.2:
+    resolution: {integrity: sha512-Wmza/JzL0SiWz7kl6MhIKT5ceIlnFPJX+lwUGj7Clhy5MMldsSoJR0+uvRzOS5Kv45Mq7t1PoE8TsOA9bzvb6g==}
+    dev: false
 
   /ci-info/3.6.2:
     resolution: {integrity: sha512-lVZdhvbEudris15CLytp2u6Y0p5EKfztae9Fqa189MfNmln9F33XuH69v5fvNfiRN5/0eAUz2yJL3mo+nhaRKg==}

@@ -1,10 +1,7 @@
 import glob from "glob";
 import * as fs from "node:fs/promises";
 import process from "process";
-
-// // Replicate __dirname and __filename behavior
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+import { execSync } from "child_process";
 
 const bumpAllPackages = async function (version) {
 	// Bump root pacakge
@@ -53,9 +50,17 @@ const getVersion = args => {
 	return null;
 };
 
+// Retrieve version from arguments
 const version = getVersion(process.argv);
 if (!version) {
 	throw new Error("You must provide a value for --version argument");
 }
 
+// Bump all packages
 bumpAllPackages(version);
+
+// Stage and commit
+execSync("git add *", { stdio: "inherit" });
+execSync(`git commit -m "chore: release version: ${version}"`, {
+	stdio: "inherit",
+});
