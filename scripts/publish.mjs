@@ -18,5 +18,4 @@ const publishAllPackages = async function () {
 };
 
 execSync("pnpm build", { stdio: "inherit" });
-console.log("build finished");
-// await publishAllPackages();
+await publishAllPackages();
