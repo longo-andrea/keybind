@@ -1,5 +1,5 @@
 {
-	"name": "core",
+	"name": "@keybind/core",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"typings": "dist/index.d.ts",
