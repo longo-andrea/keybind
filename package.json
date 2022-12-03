@@ -11,7 +11,8 @@
 		"lint:fix": "eslint --ignore-path .eslintignore ./packages/*/**.ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
 		"dev:demo": "cd ./demo; pnpm dev",
-		"docs:readme": "typedoc; node ./scripts/generate-readme.mjs"
+		"docs:readme": "typedoc; node ./scripts/generate-readme.mjs",
+		"docs:changelog": "standard-version"
 	},
 	"keywords": [
 		"keyboard",
@@ -41,6 +42,7 @@
 		"rollup": "^3.5.0",
 		"rollup-plugin-dts": "^5.0.0",
 		"rollup-plugin-esbuild": "^5.0.0",
+		"standard-version": "^9.5.0",
 		"turbodepot-node": "^7.0.3",
 		"typedoc": "^0.23.21",
 		"typedoc-plugin-markdown": "^3.13.6",
