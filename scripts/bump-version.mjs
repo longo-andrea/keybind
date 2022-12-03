@@ -59,8 +59,9 @@ if (!version) {
 // Bump all packages
 bumpAllPackages(version);
 
-// Stage and commit
+// Stage, commit and tag
 execSync("git add .", { stdio: "inherit" });
 execSync(`git commit -m "chore: release version: ${version}"`, {
 	stdio: "inherit",
 });
+execSync(`git tag -a v${version} -m "v${version}"`, { stdio: "inherit" });
