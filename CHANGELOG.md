@@ -1,7 +1,15 @@
-# Changelog
+#### 0.3.0 (2022-12-03)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+##### Build System / Dependencies
 
-# Changelog
+*  fix publish script (443a8a81)
+*  fix publish script (6ed7b27f)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+##### Chores
+
+*  change packages name (da5a68fc)
+
+##### Documentation Changes
+
+*  changelog (2cc38979)
+
