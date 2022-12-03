@@ -1,5 +1,5 @@
 {
-	"name": "keybind-monorepo",
+	"name": "@longo-andrea/keybind-monorepo",
 	"version": "0.3.0",
 	"description": "A Typescript library for easily binding keyboard keys",
 	"author": "Andrea Longo<https://github.com/longo-andrea>",
