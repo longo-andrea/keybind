@@ -5,13 +5,13 @@
 	"author": "Andrea Longo<https://github.com/longo-andrea>",
 	"main": "index.js",
 	"scripts": {
+		"bump": "node ./scripts/bump-version.mjs",
 		"build": "rollup -c ./scripts/rollup.config.mjs",
 		"lint": "eslint --ignore-path .eslintignore ./packages/*/**.ts",
 		"lint:fix": "eslint --ignore-path .eslintignore ./packages/*/**.ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
 		"dev:demo": "cd ./demo; pnpm dev",
-		"docs:readme": "typedoc; node ./scripts/generate-readme.mjs",
-		"prepare": "simple-git-hooks"
+		"docs:readme": "typedoc; node ./scripts/generate-readme.mjs"
 	},
 	"keywords": [
 		"keyboard",
@@ -35,6 +35,7 @@
 		"@commitlint/cli": "^17.3.0",
 		"@commitlint/config-conventional": "^17.3.0",
 		"eslint-config-prettier": "^8.5.0",
+		"glob": "^8.0.3",
 		"prettier": "^2.8.0",
 		"rollup": "^3.5.0",
 		"rollup-plugin-dts": "^5.0.0",

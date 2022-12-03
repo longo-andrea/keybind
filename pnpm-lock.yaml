@@ -14,6 +14,7 @@ importers:
       esbuild-node-externals: ^1.5.0
       eslint: ^8.28.0
       eslint-config-prettier: ^8.5.0
+      glob: ^8.0.3
       prettier: ^2.8.0
       rollup: ^3.5.0
       rollup-plugin-dts: ^5.0.0
@@ -27,6 +28,7 @@ importers:
       '@commitlint/cli': 17.3.0
       '@commitlint/config-conventional': 17.3.0
       eslint-config-prettier: 8.5.0_eslint@8.28.0
+      glob: 8.0.3
       prettier: 2.8.0
       rollup: 3.5.0
       rollup-plugin-dts: 5.0.0_thigodkhmbmbgju2inwjpgoskq
@@ -2914,6 +2916,17 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
+
+  /glob/8.0.3:
+    resolution: {integrity: sha512-ull455NHSHI/Y1FqGaaYFaLGkNMMJbavMrEGFXG/PGrg6y7sutWHUHrz6gy6WEBH6akM1M414dWKCNs+IhKdiQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      fs.realpath: 1.0.0
+      inflight: 1.0.6
+      inherits: 2.0.4
+      minimatch: 5.1.0
+      once: 1.4.0
+    dev: false
 
   /global-dirs/0.1.1:
     resolution: {integrity: sha512-NknMLn7F2J7aflwFOlGdNIuCDpN3VGoSoB+aap3KABFWbHVn1TCgFC+np23J8W2BiZbjfEw3BFBycSMv1AFblg==}

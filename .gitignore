@@ -7,3 +7,4 @@ dist
 node_modules
 .turbo
 coverage
+index.d.ts
