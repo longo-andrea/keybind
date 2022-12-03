@@ -16,7 +16,7 @@ KeyBind is a library written in Typescripts, that aim to provide an easy way to 
 
 Install the package with your favourite package manager. For example:
 
-```
+```ts
 npm i keybind
 ```
 
@@ -24,7 +24,7 @@ npm i keybind
 
 Start using Keybind is pretty simple:
 
-```
+```ts
 import { initKeybind, addKey } from "keybind";
 
 // Init KeyBind library in document.body
@@ -32,16 +32,16 @@ initKeybind(document.body);
 
 // Then we can add all the biding we want
 addKey(
-    "S",
-    {
-        keyupCallback: () => {
-            console.log("Hello from keyup S");
-        },
-        keydownCallback: () => {
-            console.log("Hello from keydown S");
-        },
-    },
-    { preventRepeatOnKeyDown: true }
+	"S",
+	{
+		keyupCallback: () => {
+			console.log("Hello from keyup S");
+		},
+		keydownCallback: () => {
+			console.log("Hello from keydown S");
+		},
+	},
+	{ preventRepeatOnKeyDown: true }
 );
 ```
 
@@ -70,7 +70,7 @@ Add a key-callback pair to the binded keys.
 
 #### Defined in
 
-[index.ts:66](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L66)
+[index.ts:66](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L66)
 
 ___
 
@@ -86,7 +86,7 @@ Remove all the bindend keys from the list.
 
 #### Defined in
 
-[index.ts:114](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L114)
+[index.ts:114](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L114)
 
 ___
 
@@ -108,7 +108,7 @@ Init keybind library in a given target.
 
 #### Defined in
 
-[index.ts:53](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L53)
+[index.ts:53](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L53)
 
 ___
 
@@ -126,7 +126,7 @@ Whether the binding is enabled or not.
 
 #### Defined in
 
-[index.ts:153](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L153)
+[index.ts:153](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L153)
 
 ___
 
@@ -150,7 +150,7 @@ Whether the key is binded or not.
 
 #### Defined in
 
-[index.ts:125](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L125)
+[index.ts:125](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L125)
 
 ___
 
@@ -172,7 +172,7 @@ Remove the bindend key from the list.
 
 #### Defined in
 
-[index.ts:95](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L95)
+[index.ts:95](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L95)
 
 ___
 
@@ -194,7 +194,7 @@ Toggle bind state.
 
 #### Defined in
 
-[index.ts:143](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L143)
+[index.ts:143](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L143)
 
 ___
 
@@ -216,7 +216,7 @@ Unbinds listeners.
 
 #### Defined in
 
-[index.ts:163](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/index.ts#L163)
+[index.ts:163](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L163)
 # Module: types
 
 ## Interfaces
@@ -236,7 +236,7 @@ Unbinds listeners.
 
 #### Defined in
 
-[types.ts:2](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/types.ts#L2)
+[types.ts:2](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L2)
 
 ___
 
@@ -246,7 +246,7 @@ ___
 
 #### Defined in
 
-[types.ts:3](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/types.ts#L3)
+[types.ts:3](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L3)
 # Interface: KeyBindingCallbacks
 
 [types](../modules/types.md).KeyBindingCallbacks
@@ -255,11 +255,17 @@ ___
 
 ### keydownCallback
 
-• **keydownCallback**: () => `void`
+• **keydownCallback**: (`e?`: `KeyboardEvent`) => `void`
 
 #### Type declaration
 
-▸ (): `void`
+▸ (`e?`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `e?` | `KeyboardEvent` |
 
 ##### Returns
 
@@ -267,17 +273,23 @@ ___
 
 #### Defined in
 
-[types.ts:8](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/types.ts#L8)
+[types.ts:8](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L8)
 
 ___
 
 ### keyupCallback
 
-• `Optional` **keyupCallback**: () => `void`
+• `Optional` **keyupCallback**: (`e?`: `KeyboardEvent`) => `void`
 
 #### Type declaration
 
-▸ (): `void`
+▸ (`e?`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `e?` | `KeyboardEvent` |
 
 ##### Returns
 
@@ -285,7 +297,7 @@ ___
 
 #### Defined in
 
-[types.ts:7](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/types.ts#L7)
+[types.ts:7](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L7)
 # Interface: KeyBindingOptions
 
 [types](../modules/types.md).KeyBindingOptions
@@ -298,7 +310,7 @@ ___
 
 #### Defined in
 
-[types.ts:12](https://github.com/longo-andrea/keybind/blob/df3762f/packages/core/types.ts#L12)
+[types.ts:12](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L12)
 # Licence
 
 MIT License © 2022 [Andrea Longo](https://github.com/longo-andrea)
