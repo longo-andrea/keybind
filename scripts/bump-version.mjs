@@ -17,28 +17,21 @@ const bumpAllPackages = async function (version) {
 	await fs.writeFile("package.json", newRootPackageJSON);
 
 	// Look for packages and bump
-	await glob(
-		"packages/core/**/package.json",
-		{ ignore: "packages/core/node_modules/**/package.json" },
-		async (error, files) => {
-			if (error) {
-				throw new Error("Error during packages search.");
-			}
-
-			for (const file of files) {
-				const packageJSON = await fs.readFile(file);
-				const newPackageJSON = JSON.stringify(
-					{
-						...JSON.parse(packageJSON),
-						version,
-					},
-					null,
-					4
-				);
-				await fs.writeFile(file, newPackageJSON);
-			}
-		}
-	);
+	const files = glob.sync("packages/core/**/package.json", {
+		ignore: "packages/core/node_modules/**/package.json",
+	});
+	for (const file of files) {
+		const packageJSON = await fs.readFile(file);
+		const newPackageJSON = JSON.stringify(
+			{
+				...JSON.parse(packageJSON),
+				version,
+			},
+			null,
+			4
+		);
+		await fs.writeFile(file, newPackageJSON);
+	}
 };
 
 const getVersion = args => {
@@ -57,7 +50,7 @@ if (!version) {
 }
 
 // Bump all packages
-bumpAllPackages(version);
+await bumpAllPackages(version);
 
 // Stage, commit and tag
 execSync("git add .", { stdio: "inherit" });
