@@ -3,6 +3,7 @@ import corePackages from "../coreMDs.json" assert { type: "json" };
 
 export default defineConfig({
 	title: "Keybind",
+	base: "/keybind/",
 	description: "A Typescript library for easily binding keyboard keys",
 	themeConfig: {
 		logo: "./logo.svg",
