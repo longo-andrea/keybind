@@ -9,3 +9,10 @@ node_modules
 coverage
 index.d.ts
 api
+
+/* Docs related files */
+packages/logo.svg
+packages/readme_getting_started.md
+packages/readme_header.md
+packages/readme_license.md
+packages/coreMDs.json
