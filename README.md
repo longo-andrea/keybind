@@ -46,271 +46,248 @@ addKey(
 ```
 
 For a live demo take a look to the [demo folder](https://github.com/longo-andrea/keybind/tree/main/demo)
-# Module: index
 
-## Functions
+# API
+# AddKey
 
-### addKey
+Add a new key to the binding list. Let you specify which key should be binded, keyup and keydown callback, and eventually some options.
 
-▸ **addKey**(`stringKey`, `callbacks`, `options?`): `void`
+## Parameters
 
-Add a key-callback pair to the binded keys.
+| Name      | Type                | Mandatory | Default                             |
+| --------- | ------------------- | --------- | ----------------------------------- |
+| stringKey | string              | true      | -                                   |
+| callbacks | KeyBindingCallbacks | true      | -                                   |
+| options   | KeyBindingOptions   | false     | `{ preventRepeatOnKeyDown: false }` |
 
-#### Parameters
+## Returns
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `stringKey` | `string` | The key, in string, we want to bind. |
-| `callbacks` | [`KeyBindingCallbacks`](../interfaces/types.KeyBindingCallbacks.md) | The callbacks for keyup/keydown events. |
-| `options` | [`KeyBindingOptions`](../interfaces/types.KeyBindingOptions.md) | Eventual options for the key. |
+void
 
-#### Returns
+## Usage
 
-`void`
+```ts
+import { addKey } from "keybind";
 
-#### Defined in
+// Init KeyBind and do some stuff ...
 
-[index.ts:66](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L66)
-
-___
-
-### clearKeys
-
-▸ **clearKeys**(): `void`
+// Then we can add all the biding we want
+addKey(
+	"S",
+	{
+		keyupCallback: () => {
+			console.log("Hello from keyup S");
+		},
+		keydownCallback: () => {
+			console.log("Hello from keydown S");
+		},
+	},
+	{ preventRepeatOnKeyDown: true }
+);
+```
+# ClearKeys
 
 Remove all the bindend keys from the list.
 
-#### Returns
+## Parameters
 
-`void`
+No parameters required.
 
-#### Defined in
+## Returns
 
-[index.ts:114](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L114)
+void
 
-___
+## Usage
 
-### initKeybind
+```ts
+import { clearKeys } from "keybind";
 
-▸ **initKeybind**(`target`): `void`
+// Init KeyBind and do some stuff ...
+
+// Then we can add all the biding we want
+clearKeys();
+```
+# InitKeybind
 
 Init keybind library in a given target.
 
-#### Parameters
+## Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `target` | `HTMLElement` | The element we want to bind the keys. |
+| Name   | Type        | Mandatory | Default |
+| ------ | ----------- | --------- | ------- |
+| target | HTMLElement | true      | -       |
 
-#### Returns
+## Returns
 
-`void`
+void
 
-#### Defined in
+## Usage
 
-[index.ts:53](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L53)
+```ts
+import { initKeybind } from "keybind";
 
-___
-
-### isBindingEnabled
-
-▸ **isBindingEnabled**(): `boolean`
+initKeybind(document.body);
+```
+# IsBindingEnabled
 
 Returns whether the binding is enabled or not.
 
-#### Returns
+## Parameters
 
-`boolean`
+No parameters required
 
-Whether the binding is enabled or not.
+## Returns
 
-#### Defined in
+`boolean` - whether the binding is enabled
 
-[index.ts:153](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L153)
+## Usage
 
-___
+```ts
+import { isBindingEnabled } from "keybind";
 
-### isKeyBinded
+// Init KeyBind and do some stuff ...
 
-▸ **isKeyBinded**(`stringKey`): `boolean`
+// Then we can add all the biding we want
+if (isBindingEnabled()) {
+	console.log("Bindining enabled");
+} else {
+	console.log("Bindining disabled");
+}
+```
+# IsKeyBinded
 
-Returns whether the key is binded or not.
+Returns whether a given key is binded or not.
 
-#### Parameters
+## Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `stringKey` | `string` | The key, in string, we want to look for. |
+| Name      | Type   | Mandatory | Default |
+| --------- | ------ | --------- | ------- |
+| stringKey | string | true      | -       |
 
-#### Returns
+## Returns
 
-`boolean`
+`boolean` - returns whether the given key is binded
 
-Whether the key is binded or not.
+## Usage
 
-#### Defined in
+```ts
+import { isKeyBinded } from "keybind";
 
-[index.ts:125](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L125)
+// Init KeyBind and do some stuff ...
 
-___
+if (isKeyBinded("S")) {
+	console.log("S is binded");
+} else {
+	console.log("S isn't binded");
+}
+```
+# RemoveKey
 
-### removeKey
+Remove the given key (if binded) from the binding list.
 
-▸ **removeKey**(`stringKey`): `void`
+## Parameters
 
-Remove the bindend key from the list.
+| Name      | Type   | Mandatory | Default |
+| --------- | ------ | --------- | ------- |
+| stringKey | string | true      | -       |
 
-#### Parameters
+## Returns
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `stringKey` | `string` | The key, in string, to remove |
+void
 
-#### Returns
+## Usage
 
-`void`
+```ts
+import { removeKey } from "keybind";
 
-#### Defined in
+// Init KeyBind and do some stuff ...
 
-[index.ts:95](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L95)
+// Then we can add remove the biding we want
+removeKey("S");
+```
+# ToggleBinding
 
-___
+Allows to enable/disable binding.
 
-### toggleBinding
+## Parameters
 
-▸ **toggleBinding**(`enable`): `void`
+| Name   | Type    | Mandatory | Default |
+| ------ | ------- | --------- | ------- |
+| enable | boolean | true      | -       |
 
-Toggle bind state.
+## Returns
 
-#### Parameters
+void
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `enable` | `boolean` | The new state of binding. |
+## Usage
 
-#### Returns
+```ts
+import { toggleBinding } from "keybind";
 
-`void`
+// Init KeyBind and do some stuff ...
 
-#### Defined in
+// Let's turn off binding
+toggleBinding(false);
 
-[index.ts:143](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L143)
+// ... and then turn on again
+toggleBinding(true);
+```
+# UnbindListeners
 
-___
+Unbind Keybind library.
 
-### unbindListeners
+## Parameters
 
-▸ **unbindListeners**(`target`): `void`
+| Name   | Type        | Mandatory | Default |
+| ------ | ----------- | --------- | ------- |
+| target | HTMLElement | true      | -       |
 
-Unbinds listeners.
+## Returns
 
-#### Parameters
+void
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `target` | `HTMLElement` | The target we want to unbid. |
+## Usage
 
-#### Returns
+```ts
+import { unbindListeners } from "keybind";
 
-`void`
+// Init KeyBind and do some stuff ...
 
-#### Defined in
+unbindListeners(document.body);
+```
+# Types
 
-[index.ts:163](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/index.ts#L163)
-# Module: types
+## KeyBindingCallbackMap
 
-## Interfaces
+Represents the key binded by the library.
 
-- [KeyBindingCallbackMap](../interfaces/types.KeyBindingCallbackMap.md)
-- [KeyBindingCallbacks](../interfaces/types.KeyBindingCallbacks.md)
-- [KeyBindingOptions](../interfaces/types.KeyBindingOptions.md)
-# Interface: KeyBindingCallbackMap
+### Properties
 
-[types](../modules/types.md).KeyBindingCallbackMap
+| Name      | Type                | Mandatory |
+| --------- | ------------------- | --------- |
+| callbacks | KeyBindingCallbacks | true      |
+| options   | KeyBindingOptions   | false     |
 
-## Properties
+## KeyBindingCallbacks
 
-### callbacks
+Represents the callbacks binded by the library.
 
-• **callbacks**: [`KeyBindingCallbacks`](types.KeyBindingCallbacks.md)
+### Properties
 
-#### Defined in
+| Name            | Type                        | Mandatory |
+| --------------- | --------------------------- | --------- |
+| keyupCallback   | (e?: KeyboardEvent) => void | false     |
+| keydownCallback | (e?: KeyboardEvent) => void | true      |
 
-[types.ts:2](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L2)
+## KeyBindingOptions
 
-___
+Represent the available options for binding.
 
-### options
+### Properties
 
-• `Optional` **options**: [`KeyBindingOptions`](types.KeyBindingOptions.md)
-
-#### Defined in
-
-[types.ts:3](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L3)
-# Interface: KeyBindingCallbacks
-
-[types](../modules/types.md).KeyBindingCallbacks
-
-## Properties
-
-### keydownCallback
-
-• **keydownCallback**: (`e?`: `KeyboardEvent`) => `void`
-
-#### Type declaration
-
-▸ (`e?`): `void`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `e?` | `KeyboardEvent` |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-[types.ts:8](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L8)
-
-___
-
-### keyupCallback
-
-• `Optional` **keyupCallback**: (`e?`: `KeyboardEvent`) => `void`
-
-#### Type declaration
-
-▸ (`e?`): `void`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `e?` | `KeyboardEvent` |
-
-##### Returns
-
-`void`
-
-#### Defined in
-
-[types.ts:7](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L7)
-# Interface: KeyBindingOptions
-
-[types](../modules/types.md).KeyBindingOptions
-
-## Properties
-
-### preventRepeatOnKeyDown
-
-• `Optional` **preventRepeatOnKeyDown**: `boolean`
-
-#### Defined in
-
-[types.ts:12](https://github.com/longo-andrea/keybind/blob/c509801/packages/core/types.ts#L12)
+| Name                   | Type    | Mandatory |
+| ---------------------- | ------- | --------- |
+| preventRepeatOnKeyDown | boolean | false     |
 # Licence
 
 MIT License © 2022 [Andrea Longo](https://github.com/longo-andrea)

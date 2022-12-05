@@ -32,3 +32,5 @@ addKey(
 ```
 
 For a live demo take a look to the [demo folder](https://github.com/longo-andrea/keybind/tree/main/demo)
+
+# API
