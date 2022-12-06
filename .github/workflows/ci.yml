@@ -24,16 +24,16 @@ jobs:
         run: pnpm build
 
       - name: Publish
-          run: pnpm publish:core
+          run: "pnpm publish:core"
 
       - name: Generate README
-        run: pnpm generate:readme
+        run: pnpm "generate:readme"
 
       - name: Generate CHANGELOG
-        run: pnpm generate:changelog
+        run: pnpm "generate:changelog"
 
       - name: Build docs
-        run: pnpm docs:build
+        run: pnpm "docs:build"
 
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3

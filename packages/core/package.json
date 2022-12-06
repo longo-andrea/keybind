@@ -1,25 +1,25 @@
 {
-    "name": "@longo-andrea/keybind",
-    "description": "A Typescript library for easily binding keyboard keys",
-    "author": "Andrea Longo<https://github.com/longo-andrea>",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/longo-andrea/keybind.git",
-        "directory": "packages/core"
-    },
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "typings": "dist/index.d.ts",
-    "scripts": {
-        "test": "jest"
-    },
-    "devDependencies": {
-        "@types/jest": "^29.2.3",
-        "jest": "^29.3.1",
-        "ts-jest": "^29.0.3"
-    },
-    "dependencies": {
-        "jest-environment-jsdom": "^29.3.1"
-    },
-    "version": "0.6.0"
+	"name": "@longo-andrea/keybind",
+	"description": "A Typescript library for easily binding keyboard keys",
+	"author": "Andrea Longo<https://github.com/longo-andrea>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/longo-andrea/keybind.git",
+		"directory": "packages/core"
+	},
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"typings": "dist/index.d.ts",
+	"scripts": {
+		"test": "jest"
+	},
+	"devDependencies": {
+		"@types/jest": "^29.2.3",
+		"jest": "^29.3.1",
+		"ts-jest": "^29.0.3"
+	},
+	"dependencies": {
+		"jest-environment-jsdom": "^29.3.1"
+	},
+	"version": "0.6.0"
 }
