@@ -14,6 +14,7 @@
 		"lint:fix": "eslint --ignore-path .eslintignore ./packages/*/**.ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
 		"bump": "node ./scripts/bump-version.mjs",
+		"test": "cd ./packages/core; pnpm test",
 		"build": "rollup -c ./scripts/rollup.config.mjs",
 		"publish:core": "node ./scripts/publish.mjs"
 	},

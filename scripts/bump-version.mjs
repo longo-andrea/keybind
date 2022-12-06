@@ -12,7 +12,7 @@ const bumpAllPackages = async function (version) {
 			version,
 		},
 		null,
-		4
+		"\t"
 	);
 	await fs.writeFile("package.json", newRootPackageJSON);
 
