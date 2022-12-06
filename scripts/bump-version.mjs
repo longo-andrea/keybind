@@ -58,3 +58,7 @@ execSync(`git commit -m "chore: release version: ${version}"`, {
 	stdio: "inherit",
 });
 execSync(`git tag -a v${version} -m "v${version}"`, { stdio: "inherit" });
+
+// Push
+execSync("git push origin main", { stdio: "inherit" });
+execSync(`git push origin v${version}`, { stdio: "inherit" });

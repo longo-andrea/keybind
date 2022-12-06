@@ -1,5 +1,12 @@
 {
 	"name": "@longo-andrea/keybind",
+	"description": "A Typescript library for easily binding keyboard keys",
+	"author": "Andrea Longo<https://github.com/longo-andrea>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/longo-andrea/keybind.git",
+		"directory": "packages/core"
+	},
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"typings": "dist/index.d.ts",
