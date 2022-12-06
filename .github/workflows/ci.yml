@@ -1,0 +1,44 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.16.1
+      - run: pnpm install
+
+      - name: Run test
+        run: pnpm test
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Publish
+          run: pnpm publish:core
+
+      - name: Generate README
+        run: pnpm generate:readme
+
+      - name: Generate CHANGELOG
+        run: pnpm generate:changelog
+
+      - name: Build docs
+        run: pnpm docs:build
+
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: packages/.vitepress/dist
+
+
