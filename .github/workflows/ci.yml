@@ -38,15 +38,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-      - name: Generate README
-        run: |
-          git config --global user.name "Continuous Integration"
-          git config --global user.email "longoandrea.dev@gmail.com"
-          pnpm generate:readme
-
-      - name: Generate CHANGELOG
-        run: pnpm generate:changelog
-
       - name: Build docs
         run: pnpm docs:build
 
