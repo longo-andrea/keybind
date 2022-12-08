@@ -7,7 +7,7 @@
 	"scripts": {
 		"docs:build": "node ./scripts/prepare-docs.mjs; vitepress build packages",
 		"docs:dev": "node ./scripts/prepare-docs.mjs; vitepress dev packages",
-		"generate:changelog": "node ./scripts/generate-chagnelog.mjs",
+		"generate:changelog": "node ./scripts/generate-changelog.mjs",
 		"generate:readme": "node ./scripts/generate-readme.mjs",
 		"dev:demo": "cd ./demo; pnpm dev",
 		"lint": "eslint --ignore-path .eslintignore ./packages/*/**.ts",

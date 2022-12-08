@@ -1,3 +1,9 @@
+#### 0.6.13 (2022-12-08)
+
+##### Documentation Changes
+
+*  update README.md (101efd27)
+
 #### 0.3.0 (2022-12-03)
 
 ##### Build System / Dependencies
