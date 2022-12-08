@@ -67,6 +67,10 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Init pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -88,12 +92,9 @@ jobs:
         run: pnpm generate:changelog
 
       - name: Commit generated reports
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
         run: |
-          git config --global user.name 'Continuous Integration'
-          git config --global user.email 'longo-andrea@users.noreply.github.com'
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -m "docs: generate README and CHANGELOG"
           git push
