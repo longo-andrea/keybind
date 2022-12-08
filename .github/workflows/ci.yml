@@ -101,4 +101,4 @@ jobs:
           git config --global user.email 'longo-andrea@users.noreply.github.com'
           git add .
           git commit -m "docs: generate README and CHANGELOG"
-          git push origin main
+          git push
