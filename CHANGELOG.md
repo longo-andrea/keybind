@@ -1,3 +1,19 @@
+# v0.8.1 - 2022-12-09
+
+## Build system 
+
+- <@longo-andrea> (2022-12-09) -  fix changelog generation
+
+
+## Dependencies 
+
+- <@longo-andrea> (2022-12-09) -  release version
+
+
+## Documentation 
+
+- <@longo-andrea> (2022-12-09) -  refactor changelog
+- <@github-actions> (2022-12-08) -  generate README and CHANGELOG
 # v0.8.0 - 2022-12-08
 
 ## Dependencies 
