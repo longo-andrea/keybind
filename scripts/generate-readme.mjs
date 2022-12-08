@@ -26,8 +26,3 @@ filesManager.mergeFiles(
 
 // Copy README in packages/core
 await fs.copy("./README.md", "./packages/core/README.md");
-
-// Stage, commit and push
-execSync("git add .", { stdio: "inherit" });
-execSync("git commit -m 'docs: update README.md'", { stdio: "inherit" });
-execSync("git push origin main", { stdio: "inherit" });
