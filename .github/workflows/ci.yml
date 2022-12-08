@@ -9,10 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Init pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -71,10 +67,6 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Init pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -96,6 +88,9 @@ jobs:
         run: pnpm generate:changelog
 
       - name: Commit generated reports
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
         run: |
           git config --global user.name 'Continuous Integration'
           git config --global user.email 'longo-andrea@users.noreply.github.com'
