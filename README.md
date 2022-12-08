@@ -12,7 +12,6 @@ KeyBind is a library written in Typescripts, that aim to provide an easy way to 
 - 😷 Type safety with Typescript
 - 📋 IDE integration with Typedoc
 - ✨ Framework agnostic
-
 # Install
 
 Install the package with your favourite package manager. For example:
@@ -49,7 +48,6 @@ addKey(
 For a live demo take a look to the [demo folder](https://github.com/longo-andrea/keybind/tree/main/demo)
 
 # API
-
 # AddKey
 
 Add a new key to the binding list. Let you specify which key should be binded, keyup and keydown callback, and eventually some options.
@@ -87,7 +85,6 @@ addKey(
 	{ preventRepeatOnKeyDown: true }
 );
 ```
-
 # ClearKeys
 
 Remove all the bindend keys from the list.
@@ -110,7 +107,6 @@ import { clearKeys } from "keybind";
 // Then we can add all the biding we want
 clearKeys();
 ```
-
 # InitKeybind
 
 Init keybind library in a given target.
@@ -132,7 +128,6 @@ import { initKeybind } from "keybind";
 
 initKeybind(document.body);
 ```
-
 # IsBindingEnabled
 
 Returns whether the binding is enabled or not.
@@ -159,7 +154,6 @@ if (isBindingEnabled()) {
 	console.log("Bindining disabled");
 }
 ```
-
 # IsKeyBinded
 
 Returns whether a given key is binded or not.
@@ -187,7 +181,6 @@ if (isKeyBinded("S")) {
 	console.log("S isn't binded");
 }
 ```
-
 # RemoveKey
 
 Remove the given key (if binded) from the binding list.
@@ -212,7 +205,6 @@ import { removeKey } from "keybind";
 // Then we can add remove the biding we want
 removeKey("S");
 ```
-
 # ToggleBinding
 
 Allows to enable/disable binding.
@@ -240,7 +232,6 @@ toggleBinding(false);
 // ... and then turn on again
 toggleBinding(true);
 ```
-
 # UnbindListeners
 
 Unbind Keybind library.
@@ -264,7 +255,6 @@ import { unbindListeners } from "keybind";
 
 unbindListeners(document.body);
 ```
-
 # Types
 
 ## KeyBindingCallbackMap
@@ -298,7 +288,6 @@ Represent the available options for binding.
 | Name                   | Type    | Mandatory |
 | ---------------------- | ------- | --------- |
 | preventRepeatOnKeyDown | boolean | false     |
-
 # Licence
 
 MIT License © 2022 [Andrea Longo](https://github.com/longo-andrea)
