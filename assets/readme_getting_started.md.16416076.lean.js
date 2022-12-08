@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as n,a as l}from"./app.53cbd370.js";const C=JSON.parse('{"title":"Install","description":"","frontmatter":{},"headers":[],"relativePath":"readme_getting_started.md"}'),p={name:"readme_getting_started.md"},o=l("",8),e=[o];function t(c,r,y,D,F,i){return n(),a("div",null,e)}const d=s(p,[["render",t]]);export{C as __pageData,d as default};
