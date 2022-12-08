@@ -35,6 +35,8 @@ jobs:
 
       - name: Publish
         run: pnpm publish:core
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Generate README
         run: pnpm generate:readme
