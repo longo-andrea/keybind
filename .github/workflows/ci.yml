@@ -38,6 +38,27 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Init pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.16.1
+
+      - name: Init node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - run: pnpm install
+
       - name: Build docs
         run: pnpm docs:build
 
@@ -46,3 +67,37 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: packages/.vitepress/dist
+
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Init pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.16.1
+
+      - name: Init node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - run: pnpm install
+
+      - name: README
+        run: pnpm generate:readme
+
+      - name: CHANGELOG
+        run: pnpm generate:changelog
+
+      - name: Commit generated reports
+        run: |
+          git config --global user.name 'Continuous Integration'
+          git config --global user.email 'longo-andrea@users.noreply.github.com'
+          git commit -m "docs: generate README and CHANGELOG"
+          git push origin main
