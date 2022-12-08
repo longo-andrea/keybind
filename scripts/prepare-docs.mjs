@@ -14,9 +14,6 @@ const copyDefaultMDs = async () => {
 			`./packages/${fileName}.md`
 		);
 	}
-
-	// Also copy the logo
-	await fs.copy("./scripts/assets/logo.svg", "./packages/logo.svg");
 };
 
 const createCorePackagesLinks = async () => {
