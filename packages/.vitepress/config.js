@@ -7,6 +7,9 @@ export default defineConfig({
 	description: "A Typescript library for easily binding keyboard keys",
 	themeConfig: {
 		logo: "./logo.svg",
+		socialLinks: [
+			{ icon: "github", link: "https://github.com/longo-andrea/keybind" },
+		],
 		sidebar: [
 			{
 				text: "Guide",
@@ -27,6 +30,10 @@ export default defineConfig({
 					text: pkg.name,
 					link: pkg.path,
 				})),
+			},
+			{
+				text: "Demo",
+				items: [{ text: "Live demo", link: "/demo" }],
 			},
 		],
 	},

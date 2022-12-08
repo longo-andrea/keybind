@@ -15,7 +15,10 @@ const headerFiles = [
 	path.join(__dirname, "./assets/readme_header.md"),
 	path.join(__dirname, "./assets/readme_getting_started.md"),
 ];
-const footerFiles = [path.join(__dirname, "./assets/readme_license.md")];
+const footerFiles = [
+	path.join(__dirname, "./assets/readme_demo.md"),
+	path.join(__dirname, "./assets/readme_license.md"),
+];
 
 // Merge all the files into README.md
 const filesManager = new FilesManager();
