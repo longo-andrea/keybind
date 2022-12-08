@@ -39,7 +39,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Generate README
-        run: pnpm generate:readme
+        run: |
+          git config --global user.name "Continuous Integration"
+          git config --global user.email "longoandrea.dev@gmail.com"
+          pnpm generate:readmes
 
       - name: Generate CHANGELOG
         run: pnpm generate:changelog

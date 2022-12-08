@@ -51,6 +51,7 @@ if (!version) {
 
 // Bump all packages
 await bumpAllPackages(version);
+execSync("pnpm format", { stdio: "inherit" });
 
 // Stage, commit and tag
 execSync("git add .", { stdio: "inherit" });
