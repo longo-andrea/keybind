@@ -152,5 +152,107 @@ describe("InitKeyBind", () => {
 			window.document.body.dispatchEvent(event);
 			expect(keyBCallback).toHaveBeenCalledTimes(1);
 		});
+
+		it("should trigger with combo alt", async () => {
+			initKeybind(window.document.body);
+			const keyBCallback = jest.fn();
+
+			// Add some keys
+			addKey(
+				"B",
+				{
+					keydownCallback: keyBCallback,
+				},
+				{ enableWithCombo: "Ctrl" }
+			);
+
+			// Trigger B keyup event
+			const event = new KeyboardEvent("keydown", {
+				code: "KeyB",
+				ctrlKey: true,
+			});
+			window.document.body.dispatchEvent(event);
+
+			// Expect callback to have been called
+			expect(keyBCallback).toHaveBeenCalled();
+		});
+
+		it("should trigger with combo alt", async () => {
+			initKeybind(window.document.body);
+			const keyBCallback = jest.fn();
+
+			// Add some keys
+			addKey(
+				"B",
+				{
+					keydownCallback: keyBCallback,
+				},
+				{ enableWithCombo: "Ctrl" }
+			);
+
+			// Trigger B keyup event
+			const event = new KeyboardEvent("keydown", {
+				code: "KeyB",
+				ctrlKey: true,
+			});
+			window.document.body.dispatchEvent(event);
+
+			// Expect callback to have been called
+			expect(keyBCallback).toHaveBeenCalled();
+		});
+
+		it("should not trigger with combos not pressed", async () => {
+			initKeybind(window.document.body);
+			const keyCallback = jest.fn();
+
+			// Add some keys
+			addKey(
+				"B",
+				{
+					keydownCallback: keyCallback,
+				},
+				{ enableWithCombo: "Alt" }
+			);
+			addKey(
+				"D",
+				{
+					keydownCallback: keyCallback,
+				},
+				{ enableWithCombo: "Shift" }
+			);
+			addKey(
+				"E",
+				{
+					keydownCallback: keyCallback,
+				},
+				{ enableWithCombo: "Ctrl" }
+			);
+			addKey(
+				"F",
+				{
+					keydownCallback: keyCallback,
+				},
+				{ enableWithCombo: "Meta" }
+			);
+
+			// Trigger events
+			[
+				new KeyboardEvent("keydown", {
+					code: "KeyB",
+				}),
+				new KeyboardEvent("keydown", {
+					code: "KeyD",
+				}),
+				new KeyboardEvent("keydown", {
+					code: "KeyE",
+				}),
+				new KeyboardEvent("keydown", {
+					code: "KeyF",
+				}),
+			].forEach(event => window.document.body.dispatchEvent(event));
+
+			// Expect callback to have been called
+			expect(keyCallback).not.toHaveBeenCalled();
+		});
 	});
 });
