@@ -1,3 +1,24 @@
+# v0.9.0 - 2022-12-09
+
+## Dependencies 
+
+- <@longo-andrea> (2022-12-09) -  release version
+
+
+## Documentation 
+
+- <@longo-andrea> (2022-12-09) -  added combo documentation
+- <@github-actions> (2022-12-08) -  generate README and CHANGELOG
+
+
+## Features 
+
+- <@longo-andrea> (2022-12-09) -  add combo keys handling
+
+
+## Tests 
+
+- <@longo-andrea> (2022-12-09) -  add unit test for combo keys
 # v0.8.1 - 2022-12-09
 
 ## Build system 
