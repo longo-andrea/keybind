@@ -5,11 +5,11 @@ import {
 	clearKeys,
 	unbindListeners,
 	toggleBinding,
-} from "../../index";
+} from '../../index';
 
-jest.mock("../../layouts/base");
+jest.mock('../../layouts/base');
 
-describe("addKey", () => {
+describe('addKey', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 
@@ -19,71 +19,71 @@ describe("addKey", () => {
 		toggleBinding(true);
 	});
 
-	it("should throw error if incorrect key is provided", () => {
+	it('should throw error if incorrect key is provided', () => {
 		initKeybind(window.document.body);
 
 		// add a fake key
 		expect(() => {
-			addKey("fake-key", {
+			addKey('fake-key', {
 				keydownCallback: () => {
-					console.log("Added fake key");
+					console.log('Added fake key');
 				},
 			});
-		}).toThrow("Provided key is incorrect or not supported");
+		}).toThrow('Provided key is incorrect or not supported');
 	});
 
-	it("should throw error if invalid key is provided", () => {
+	it('should throw error if invalid key is provided', () => {
 		initKeybind(window.document.body);
 
 		// add a fake key
 		expect(() => {
-			addKey("M", {
+			addKey('M', {
 				keydownCallback: () => {
-					console.log("Added a key not supported");
+					console.log('Added a key not supported');
 				},
 			});
-		}).toThrow("Provided key is incorrect or not supported");
+		}).toThrow('Provided key is incorrect or not supported');
 	});
 
-	it("should throw error if a key has already been added", () => {
+	it('should throw error if a key has already been added', () => {
 		initKeybind(window.document.body);
 
 		// add a key
-		addKey("A", {
+		addKey('A', {
 			keydownCallback: () => {
-				console.log("Added binding for letter A");
+				console.log('Added binding for letter A');
 			},
 		});
 
 		// Check if the key has been added
-		expect(isKeyBinded("A")).toBeTruthy();
+		expect(isKeyBinded('A')).toBeTruthy();
 
 		// Try the to add the same key again
 		expect(() => {
-			addKey("A", {
+			addKey('A', {
 				keydownCallback: () => {
-					console.log("Added a key not supported");
+					console.log('Added a key not supported');
 				},
 			});
 		}).toThrow(
-			"Provided key has already been initialized. Please explicitly remove it."
+			'Provided key has already been initialized. Please explicitly remove it.',
 		);
 	});
 
-	it("should add a key with both keyup and keydown events", () => {
+	it('should add a key with both keyup and keydown events', () => {
 		initKeybind(window.document.body);
 
 		// add a key
-		addKey("A", {
+		addKey('A', {
 			keyupCallback: () => {
-				console.log("Added binding for letter A");
+				console.log('Added binding for letter A');
 			},
 			keydownCallback: () => {
-				console.log("Added binding for keydown letter A");
+				console.log('Added binding for keydown letter A');
 			},
 		});
 
 		// Check if the key has been added
-		expect(isKeyBinded("A")).toBeTruthy();
+		expect(isKeyBinded('A')).toBeTruthy();
 	});
 });

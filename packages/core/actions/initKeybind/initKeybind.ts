@@ -1,5 +1,5 @@
-import { _keyupHandler } from "../utils/keyUpHandler";
-import { _keydownHandler } from "../utils/keyDownHandler";
+import { _keyupHandler } from '../utils/keyUpHandler';
+import { _keydownHandler } from '../utils/keyDownHandler';
 
 /**
  * Init keybind library in a given target.
@@ -8,6 +8,6 @@ import { _keydownHandler } from "../utils/keyDownHandler";
  *
  */
 export function initKeybind(target: HTMLElement) {
-	target.addEventListener("keyup", _keyupHandler);
-	target.addEventListener("keydown", _keydownHandler);
+	target.addEventListener('keyup', _keyupHandler);
+	target.addEventListener('keydown', _keydownHandler);
 }

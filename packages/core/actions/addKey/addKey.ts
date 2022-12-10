@@ -1,6 +1,6 @@
-import { keybindingState } from "../../state";
-import { KeyBindingCallbacks, KeyBindingOptions } from "../../types";
-import { layout as base } from "../../layouts/base";
+import { keybindingState } from '../../state';
+import { KeyBindingCallbacks, KeyBindingOptions } from '../../types';
+import { layout as base } from '../../layouts/base';
 
 /**
  * Add a key-callback pair to the binded keys.
@@ -13,20 +13,20 @@ import { layout as base } from "../../layouts/base";
 export const addKey = (
 	stringKey: string,
 	callbacks: KeyBindingCallbacks,
-	options: KeyBindingOptions = { preventRepeatOnKeyDown: false }
+	options: KeyBindingOptions = { preventRepeatOnKeyDown: false },
 ) => {
 	if (!stringKey || !base.has(stringKey)) {
-		throw Error("Provided key is incorrect or not supported");
+		throw Error('Provided key is incorrect or not supported');
 	}
 
 	const keyCode = base.get(stringKey);
 	if (!keyCode) {
-		throw Error("Provided key is incorrect or not supported");
+		throw Error('Provided key is incorrect or not supported');
 	}
 
 	if (keybindingState.bindedKeys.has(keyCode)) {
 		throw Error(
-			"Provided key has already been initialized. Please explicitly remove it."
+			'Provided key has already been initialized. Please explicitly remove it.',
 		);
 	}
 

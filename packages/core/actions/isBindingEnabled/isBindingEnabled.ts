@@ -1,4 +1,4 @@
-import { keybindingState } from "../../state";
+import { keybindingState } from '../../state';
 
 /**
  * Returns whether the binding is enabled or not.

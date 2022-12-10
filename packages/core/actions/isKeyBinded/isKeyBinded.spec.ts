@@ -5,11 +5,11 @@ import {
 	clearKeys,
 	unbindListeners,
 	toggleBinding,
-} from "../../index";
+} from '../../index';
 
-jest.mock("../../layouts/base");
+jest.mock('../../layouts/base');
 
-describe("isKeyBinded", () => {
+describe('isKeyBinded', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 
@@ -19,35 +19,35 @@ describe("isKeyBinded", () => {
 		toggleBinding(true);
 	});
 
-	it("should throw error if incorrect key is provided", () => {
+	it('should throw error if incorrect key is provided', () => {
 		initKeybind(window.document.body);
 
 		// add a fake key
 		expect(() => {
-			isKeyBinded("fake-key");
-		}).toThrow("Provided key is incorrect or not supported");
+			isKeyBinded('fake-key');
+		}).toThrow('Provided key is incorrect or not supported');
 	});
 
-	it("should throw error if invalid key is provided", () => {
+	it('should throw error if invalid key is provided', () => {
 		initKeybind(window.document.body);
 
 		// add a fake key
 		expect(() => {
-			isKeyBinded("M");
-		}).toThrow("Provided key is incorrect or not supported");
+			isKeyBinded('M');
+		}).toThrow('Provided key is incorrect or not supported');
 	});
 
-	it("should return if a key is present in the binded keys", () => {
+	it('should return if a key is present in the binded keys', () => {
 		initKeybind(window.document.body);
 
 		// add a key
-		addKey("A", {
+		addKey('A', {
 			keydownCallback: () => {
-				console.log("Added binding for letter A");
+				console.log('Added binding for letter A');
 			},
 		});
 
 		// Check if the key has been added
-		expect(isKeyBinded("A")).toBeTruthy();
+		expect(isKeyBinded('A')).toBeTruthy();
 	});
 });

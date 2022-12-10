@@ -6,11 +6,11 @@ import {
 	clearKeys,
 	unbindListeners,
 	toggleBinding,
-} from "../../index";
+} from '../../index';
 
-jest.mock("../../layouts/base");
+jest.mock('../../layouts/base');
 
-describe("removeKey", () => {
+describe('removeKey', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 
@@ -20,39 +20,39 @@ describe("removeKey", () => {
 		toggleBinding(true);
 	});
 
-	it("should throw error if incorrect key is provided", () => {
+	it('should throw error if incorrect key is provided', () => {
 		initKeybind(window.document.body);
 
 		// add a fake key
 		expect(() => {
-			removeKey("fake-key");
-		}).toThrow("Provided key is incorrect or not supported");
+			removeKey('fake-key');
+		}).toThrow('Provided key is incorrect or not supported');
 	});
 
-	it("should throw error if invalid key is provided", () => {
+	it('should throw error if invalid key is provided', () => {
 		initKeybind(window.document.body);
 
 		// add a fake key
 		expect(() => {
-			removeKey("M");
-		}).toThrow("Provided key is incorrect or not supported");
+			removeKey('M');
+		}).toThrow('Provided key is incorrect or not supported');
 	});
 
-	it("should remove a key if exists", () => {
+	it('should remove a key if exists', () => {
 		initKeybind(window.document.body);
 
 		// Add a key
-		addKey("A", {
+		addKey('A', {
 			keydownCallback: () => {
-				console.log("Added binding for letter A");
+				console.log('Added binding for letter A');
 			},
 		});
-		expect(isKeyBinded("A")).toBeTruthy();
+		expect(isKeyBinded('A')).toBeTruthy();
 
 		// Remove the key
-		removeKey("A");
+		removeKey('A');
 
 		// Check if the key has been removed
-		expect(isKeyBinded("A")).toBeFalsy();
+		expect(isKeyBinded('A')).toBeFalsy();
 	});
 });

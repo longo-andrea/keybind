@@ -1,4 +1,4 @@
-import { keybindingState } from "../../state";
+import { keybindingState } from '../../state';
 
 export const _keyupHandler = (e: KeyboardEvent) => {
 	if (

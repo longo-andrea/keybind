@@ -1,4 +1,4 @@
-import { keybindingState } from "../../state";
+import { keybindingState } from '../../state';
 
 /**
  * Remove all the bindend keys from the list.

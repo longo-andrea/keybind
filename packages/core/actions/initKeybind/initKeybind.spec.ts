@@ -4,11 +4,11 @@ import {
 	clearKeys,
 	unbindListeners,
 	toggleBinding,
-} from "../../index";
+} from '../../index';
 
-jest.mock("../../layouts/base");
+jest.mock('../../layouts/base');
 
-describe("InitKeyBind", () => {
+describe('InitKeyBind', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 
@@ -18,24 +18,24 @@ describe("InitKeyBind", () => {
 		toggleBinding(true);
 	});
 
-	describe("keyup", () => {
-		it("should trigger defined events", () => {
+	describe('keyup', () => {
+		it('should trigger defined events', () => {
 			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			const keyNCallback = jest.fn();
 
 			// Add some keys
-			addKey("B", {
+			addKey('B', {
 				keydownCallback: jest.fn(),
 				keyupCallback: keyBCallback,
 			});
-			addKey("N", {
+			addKey('N', {
 				keydownCallback: jest.fn(),
 				keyupCallback: keyNCallback,
 			});
 
 			// Trigger B keyup event
-			const event = new KeyboardEvent("keyup", { code: "KeyB" });
+			const event = new KeyboardEvent('keyup', { code: 'KeyB' });
 			window.document.body.dispatchEvent(event);
 
 			// Expect console to have
@@ -43,30 +43,30 @@ describe("InitKeyBind", () => {
 			expect(keyBCallback).toHaveBeenCalled();
 		});
 
-		it("should not trigger defined event if binding is disabled", () => {
+		it('should not trigger defined event if binding is disabled', () => {
 			initKeybind(window.document.body);
 			const keyCCallback = jest.fn();
 
 			// Add some keys
-			addKey("C", {
+			addKey('C', {
 				keydownCallback: keyCCallback,
 			});
 			toggleBinding(false);
 
 			// Trigger C keyup event
-			const event = new KeyboardEvent("keydown", { code: "KeyC" });
+			const event = new KeyboardEvent('keydown', { code: 'KeyC' });
 			window.document.body.dispatchEvent(event);
 
 			// Expect console to have
 			expect(keyCCallback).not.toHaveBeenCalled();
 		});
 
-		it("should not trigger event if key has not been binded", () => {
+		it('should not trigger event if key has not been binded', () => {
 			initKeybind(window.document.body);
 			const keyDCallback = jest.fn();
 
 			// Trigger C keyup event
-			const event = new KeyboardEvent("keyup", { code: "KeyC" });
+			const event = new KeyboardEvent('keyup', { code: 'KeyC' });
 			window.document.body.dispatchEvent(event);
 
 			// Expect console to have
@@ -74,23 +74,23 @@ describe("InitKeyBind", () => {
 		});
 	});
 
-	describe("keydown", () => {
-		it("should trigger defined events", () => {
+	describe('keydown', () => {
+		it('should trigger defined events', () => {
 			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			const keyNCallback = jest.fn();
 
 			// Add some keys
-			addKey("B", {
+			addKey('B', {
 				keydownCallback: keyBCallback,
 			});
-			addKey("N", {
+			addKey('N', {
 				keydownCallback: keyNCallback,
 			});
 
 			// Trigger B keyup event
-			const event = new KeyboardEvent("keydown", { code: "KeyB" });
-			const anotherEvent = new KeyboardEvent("keydown", { code: "KeyN" });
+			const event = new KeyboardEvent('keydown', { code: 'KeyB' });
+			const anotherEvent = new KeyboardEvent('keydown', { code: 'KeyN' });
 			window.document.body.dispatchEvent(event);
 			window.document.body.dispatchEvent(anotherEvent);
 
@@ -99,76 +99,76 @@ describe("InitKeyBind", () => {
 			expect(keyNCallback).toHaveBeenCalled();
 		});
 
-		it("should not trigger defined event if binding is disabled", () => {
+		it('should not trigger defined event if binding is disabled', () => {
 			initKeybind(window.document.body);
 			const keyCCallback = jest.fn();
 
 			// Add some keys
-			addKey("C", {
+			addKey('C', {
 				keyupCallback: jest.fn(),
 				keydownCallback: keyCCallback,
 			});
 			toggleBinding(false);
 
 			// Trigger C keyup event
-			const event = new KeyboardEvent("keydown", { code: "KeyC" });
+			const event = new KeyboardEvent('keydown', { code: 'KeyC' });
 			window.document.body.dispatchEvent(event);
 
 			// Expect console to have
 			expect(keyCCallback).not.toHaveBeenCalled();
 		});
 
-		it("should not trigger event if key has not been binded", () => {
+		it('should not trigger event if key has not been binded', () => {
 			initKeybind(window.document.body);
 			const keyDCallback = jest.fn();
 
 			// Trigger C keyup event
-			const event = new KeyboardEvent("keydown", { code: "KeyC" });
+			const event = new KeyboardEvent('keydown', { code: 'KeyC' });
 			window.document.body.dispatchEvent(event);
 
 			// Expect console to have
 			expect(keyDCallback).not.toHaveBeenCalled();
 		});
 
-		it("should not trigger multiple events if user request to preventRepeat", () => {
+		it('should not trigger multiple events if user request to preventRepeat', () => {
 			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 			// Add some keys
 			addKey(
-				"B",
+				'B',
 				{
 					keyupCallback: jest.fn(),
 					keydownCallback: keyBCallback,
 				},
-				{ preventRepeatOnKeyDown: true }
+				{ preventRepeatOnKeyDown: true },
 			);
 			// Trigger B keyup event
-			const event = new KeyboardEvent("keydown", { code: "KeyB" });
+			const event = new KeyboardEvent('keydown', { code: 'KeyB' });
 			window.document.body.dispatchEvent(event);
 			expect(keyBCallback).toHaveBeenCalled();
 
 			// Trigger a keydown event repeat
-			Object.defineProperty(event, "repeat", { get: () => true });
+			Object.defineProperty(event, 'repeat', { get: () => true });
 			window.document.body.dispatchEvent(event);
 			expect(keyBCallback).toHaveBeenCalledTimes(1);
 		});
 
-		it("should trigger with combo alt", async () => {
+		it('should trigger with combo alt', async () => {
 			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 
 			// Add some keys
 			addKey(
-				"B",
+				'B',
 				{
 					keydownCallback: keyBCallback,
 				},
-				{ enableWithCombo: "Ctrl" }
+				{ enableWithCombo: 'Ctrl' },
 			);
 
 			// Trigger B keyup event
-			const event = new KeyboardEvent("keydown", {
-				code: "KeyB",
+			const event = new KeyboardEvent('keydown', {
+				code: 'KeyB',
 				ctrlKey: true,
 			});
 			window.document.body.dispatchEvent(event);
@@ -177,22 +177,22 @@ describe("InitKeyBind", () => {
 			expect(keyBCallback).toHaveBeenCalled();
 		});
 
-		it("should trigger with combo alt", async () => {
+		it('should trigger with combo alt', async () => {
 			initKeybind(window.document.body);
 			const keyBCallback = jest.fn();
 
 			// Add some keys
 			addKey(
-				"B",
+				'B',
 				{
 					keydownCallback: keyBCallback,
 				},
-				{ enableWithCombo: "Ctrl" }
+				{ enableWithCombo: 'Ctrl' },
 			);
 
 			// Trigger B keyup event
-			const event = new KeyboardEvent("keydown", {
-				code: "KeyB",
+			const event = new KeyboardEvent('keydown', {
+				code: 'KeyB',
 				ctrlKey: true,
 			});
 			window.document.body.dispatchEvent(event);
@@ -201,53 +201,53 @@ describe("InitKeyBind", () => {
 			expect(keyBCallback).toHaveBeenCalled();
 		});
 
-		it("should not trigger with combos not pressed", async () => {
+		it('should not trigger with combos not pressed', async () => {
 			initKeybind(window.document.body);
 			const keyCallback = jest.fn();
 
 			// Add some keys
 			addKey(
-				"B",
+				'B',
 				{
 					keydownCallback: keyCallback,
 				},
-				{ enableWithCombo: "Alt" }
+				{ enableWithCombo: 'Alt' },
 			);
 			addKey(
-				"D",
+				'D',
 				{
 					keydownCallback: keyCallback,
 				},
-				{ enableWithCombo: "Shift" }
+				{ enableWithCombo: 'Shift' },
 			);
 			addKey(
-				"E",
+				'E',
 				{
 					keydownCallback: keyCallback,
 				},
-				{ enableWithCombo: "Ctrl" }
+				{ enableWithCombo: 'Ctrl' },
 			);
 			addKey(
-				"F",
+				'F',
 				{
 					keydownCallback: keyCallback,
 				},
-				{ enableWithCombo: "Meta" }
+				{ enableWithCombo: 'Meta' },
 			);
 
 			// Trigger events
 			[
-				new KeyboardEvent("keydown", {
-					code: "KeyB",
+				new KeyboardEvent('keydown', {
+					code: 'KeyB',
 				}),
-				new KeyboardEvent("keydown", {
-					code: "KeyD",
+				new KeyboardEvent('keydown', {
+					code: 'KeyD',
 				}),
-				new KeyboardEvent("keydown", {
-					code: "KeyE",
+				new KeyboardEvent('keydown', {
+					code: 'KeyE',
 				}),
-				new KeyboardEvent("keydown", {
-					code: "KeyF",
+				new KeyboardEvent('keydown', {
+					code: 'KeyF',
 				}),
 			].forEach(event => window.document.body.dispatchEvent(event));
 

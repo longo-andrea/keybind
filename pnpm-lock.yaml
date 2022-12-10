@@ -7,6 +7,7 @@ importers:
       '@commitlint/cli': ^17.3.0
       '@commitlint/config-conventional': ^17.3.0
       '@longo-andrea/eslint-config-typescript': ^0.2.0
+      '@longo-andrea/prettier': ^0.4.2
       '@types/node': ^18.11.9
       '@typescript-eslint/eslint-plugin': ^5.44.0
       '@typescript-eslint/parser': ^5.44.0
@@ -49,6 +50,7 @@ importers:
       vue: 3.2.45
     devDependencies:
       '@longo-andrea/eslint-config-typescript': 0.2.0_hsf322ms6xhhd4b5ne6lb74y4a
+      '@longo-andrea/prettier': 0.4.2
       '@types/node': 18.11.9
       '@typescript-eslint/eslint-plugin': 5.44.0_fnsv2sbzcckq65bwfk7a5xwslu
       '@typescript-eslint/parser': 5.44.0_hsf322ms6xhhd4b5ne6lb74y4a
@@ -1127,6 +1129,12 @@ packages:
       - eslint-import-resolver-webpack
       - supports-color
       - typescript
+    dev: true
+
+  /@longo-andrea/prettier/0.4.2:
+    resolution: {integrity: sha512-isYtgqKsvgjP9lH57w1Hqns2DLyypgrtBheiiuVVzQ3nr3kHKScapRNS34iA4PGD9pyLrhb50igOHdHq4328yg==}
+    dependencies:
+      prettier: 2.8.1
     dev: true
 
   /@nicolo-ribaudo/eslint-scope-5-internals/5.1.1-v1:
@@ -4647,6 +4655,12 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: false
+
+  /prettier/2.8.1:
+    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /pretty-format/29.3.1:
     resolution: {integrity: sha512-FyLnmb1cYJV8biEIiRyzRFvs2lry7PPIvOqKVe1GCUEYg4YGmlx1qG9EJNMxArYm7piII4qb8UV1Pncq5dxmcg==}

@@ -1,5 +1,5 @@
-import { _keyupHandler } from "../utils/keyUpHandler";
-import { _keydownHandler } from "../utils/keyDownHandler";
+import { _keyupHandler } from '../utils/keyUpHandler';
+import { _keydownHandler } from '../utils/keyDownHandler';
 
 /**
  * Unbinds listeners.
@@ -8,6 +8,6 @@ import { _keydownHandler } from "../utils/keyDownHandler";
  *
  */
 export const unbindListeners = (target: HTMLElement) => {
-	target.removeEventListener("keyup", _keyupHandler);
-	target.removeEventListener("keydown", _keydownHandler);
+	target.removeEventListener('keyup', _keyupHandler);
+	target.removeEventListener('keydown', _keydownHandler);
 };

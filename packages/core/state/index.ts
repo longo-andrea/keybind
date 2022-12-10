@@ -1,4 +1,4 @@
-import { KeyBindingCallbackMap } from "../types";
+import { KeyBindingCallbackMap } from '../types';
 
 export const keybindingState = {
 	bindedKeys: new Map<string, KeyBindingCallbackMap>(),

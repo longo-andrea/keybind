@@ -4,11 +4,11 @@ import {
 	clearKeys,
 	unbindListeners,
 	toggleBinding,
-} from "../../index";
+} from '../../index';
 
-jest.mock("../../layouts/base");
+jest.mock('../../layouts/base');
 
-describe("toggleBinding", () => {
+describe('toggleBinding', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 
@@ -18,8 +18,8 @@ describe("toggleBinding", () => {
 		toggleBinding(true);
 	});
 
-	describe("enable & isEnabled", () => {
-		it("should enable bindings", () => {
+	describe('enable & isEnabled', () => {
+		it('should enable bindings', () => {
 			initKeybind(window.document.body);
 
 			// Enable bindings
@@ -30,8 +30,8 @@ describe("toggleBinding", () => {
 		});
 	});
 
-	describe("disable & isEnabled", () => {
-		it("should disable bindings", () => {
+	describe('disable & isEnabled', () => {
+		it('should disable bindings', () => {
 			initKeybind(window.document.body);
 
 			// Disable bindings

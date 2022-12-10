@@ -1,4 +1,4 @@
-import { keybindingState } from "../../state";
+import { keybindingState } from '../../state';
 
 export const _keydownHandler = (e: KeyboardEvent) => {
 	if (
@@ -25,16 +25,16 @@ export const _keydownHandler = (e: KeyboardEvent) => {
 	if (bindedKey && bindedKey.options && bindedKey.options.enableWithCombo) {
 		const requiredCombo = bindedKey.options.enableWithCombo;
 
-		if (requiredCombo === "Meta" && !e.metaKey) {
+		if (requiredCombo === 'Meta' && !e.metaKey) {
 			return;
 		}
-		if (requiredCombo === "Ctrl" && !e.ctrlKey) {
+		if (requiredCombo === 'Ctrl' && !e.ctrlKey) {
 			return;
 		}
-		if (requiredCombo === "Shift" && !e.shiftKey) {
+		if (requiredCombo === 'Shift' && !e.shiftKey) {
 			return;
 		}
-		if (requiredCombo === "Alt" && !e.altKey) {
+		if (requiredCombo === 'Alt' && !e.altKey) {
 			return;
 		}
 	}

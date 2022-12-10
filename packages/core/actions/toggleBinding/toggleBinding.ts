@@ -1,4 +1,4 @@
-import { keybindingState } from "../../state";
+import { keybindingState } from '../../state';
 
 /**
  * Toggle bind state.
